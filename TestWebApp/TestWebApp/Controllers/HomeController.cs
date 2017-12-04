@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NHibernate;
+using NHibernate.Linq;
+using TestWebApp.Models;
+using TestWebApp.Entity;
 
 namespace TestWebApp.Controllers
 {
@@ -10,14 +14,20 @@ namespace TestWebApp.Controllers
     {
         public ActionResult Index()
         {
+            
+            
             return View();
         }
 
         public ActionResult Account()
         {
-            ViewBag.Message = "Your account page.";
-
-            return View();
+            ViewBag.Message = "Your account page is here.";
+            using (ISession session = NHibernateSession.OpenSession())
+            {
+                var accounts = session.Query<Account>().ToList();
+                return View(accounts);
+            }
+            //return View();
         }
 
         public ActionResult Contact()
