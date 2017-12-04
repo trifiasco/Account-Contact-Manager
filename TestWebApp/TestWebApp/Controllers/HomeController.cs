@@ -13,9 +13,9 @@ namespace TestWebApp.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Account()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Your account page.";
 
             return View();
         }
