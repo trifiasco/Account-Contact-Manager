@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="NhibernateMVC" namespace="NhibernateMVC.Models">
+  <class name="Account" table="Account" dynamic-update="true" >
+    <cache usage="read-write"/>
+    <id name="Id" column="Id" type="int">
+      <generator class="identity" />
+    </id>
+    <property Name="Name" />
+    
+  </class>
+</hibernate-mapping>
