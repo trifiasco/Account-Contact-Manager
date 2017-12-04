@@ -8,10 +8,13 @@
       NHibernate.Driver.SqlClientDriver
     </property>
     <property name="connection.connection_string">
-      @"Server=Data Source=192.168.1.129;DataBase=MyFirstDB;User ID=ENOSISBD\arnabroy;Password=Enosis123;"
+      Data Source=ARNABROYPC\SQLEXPRESS;DataBase=MyFirstDB;User ID=trifiasco;Password=Enosis123;
     </property>
     <property name="dialect">
-      NHibernate.Dialect.MsSql2012Dialect
+      NHibernate.Dialect.MsSql2008Dialect
     </property>
+    <property name="proxyfactory.factory_class">NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu</property>
+    
+
   </session-factory>
 </hibernate-configuration>
