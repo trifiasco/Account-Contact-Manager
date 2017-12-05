@@ -112,5 +112,39 @@ namespace TestWebApp.Controllers
             }
         }
 
+
+        //GET: Contact/Delete
+
+        public ActionResult Delete(int id)
+        {
+            using (ISession session = NHibernateSession.OpenSessionForContact())
+            {
+                var contact = session.Get<Contact>(id);
+                return View(contact);
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult Delete(int id, Contact contact)
+        {
+            try
+            {
+                using (ISession session = NHibernateSession.OpenSessionForContact())
+                {
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        session.Delete(contact);
+                        transaction.Commit();
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
+
     }
 }
