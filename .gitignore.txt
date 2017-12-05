@@ -1,3 +1,6 @@
+TestWebApp/.vs/
+TestWebApp/packages/
+
 #Git merge conflict files
 *.orig
 *.bak
