@@ -74,6 +74,37 @@ namespace TestWebApp.Controllers
             }
         }
 
+        public ActionResult Delete(int id)
+        {
+            using (ISession session = NHibernateSession.OpenSession())
+            {
+                var account = session.Get<Account>(id);
+                return View(account);
+            }
+        }
+
+
+        [HttpPost]
+        public ActionResult Delete(int id, Account account)
+        {
+            try
+            {
+                using (ISession session = NHibernateSession.OpenSession())
+                {
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        session.Delete(account);
+                        transaction.Commit();
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception exception)
+            {
+                return View();
+            }
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
