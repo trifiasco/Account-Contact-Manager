@@ -28,7 +28,7 @@ namespace TestWebApp.Controllers
             return View();
         }
 
-        // POST: Home/Create
+        // POST: Contact/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -60,6 +60,48 @@ namespace TestWebApp.Controllers
                 return View();
             }
         }
+
+        // GET: Contact/Edit
+        public ActionResult Edit(int id)
+        {
+            using (ISession session = NHibernateSession.OpenSessionForContact())
+            {
+                var contact = session.Get<Contact>(id);
+                return View(contact);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, Contact contact)
+        {
+            try
+            {
+                using (ISession session = NHibernateSession.OpenSessionForContact())
+                {
+                    var contactUpdate = session.Get<Contact>(id);
+
+                    contactUpdate.Id = contact.Id;
+                    contactUpdate.FirstName = contact.FirstName;
+                    contactUpdate.LastName = contact.LastName;
+                    contactUpdate.Email = contact.Email;
+
+
+
+                    using (ITransaction transaction = session.BeginTransaction())
+                    {
+                        session.Save(contactUpdate);
+                        transaction.Commit();
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
 
     }
 }
