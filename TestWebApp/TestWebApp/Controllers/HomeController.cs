@@ -27,6 +27,41 @@ namespace TestWebApp.Controllers
             }
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Home/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            try
+            {
+                Account account = new Account();     //  Creating a new instance of the account
+                account.Id = Convert.ToInt32(collection["Id"]);
+                account.Name = collection["Name"].ToString();
+                
+
+                // TODO: Add insert logic here
+                using (ISession session = NHibernateSession.OpenSession())
+                {
+                    using (ITransaction transaction = session.BeginTransaction())   //  Begin a transaction
+                    {
+                        session.Save(account); //  Save the book in session
+                        transaction.Commit();   //  Commit the changes to the database
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = e.Message;
+                //e.Message;
+                return View();
+            }
+        }
+
         public ActionResult Edit(int id)
         {
             using (ISession session = NHibernateSession.OpenSession())
