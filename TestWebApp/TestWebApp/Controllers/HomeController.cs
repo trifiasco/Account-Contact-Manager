@@ -65,7 +65,14 @@ namespace TestWebApp.Controllers
             }
         }
 
-        
+        public ActionResult Details(int id)
+        {
+            using (ISession session = NHibernateSession.OpenSession())
+            {
+                var employee = session.Get<Account>(id);
+                return View(employee);
+            }
+        }
 
         public ActionResult Contact()
         {
