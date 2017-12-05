@@ -19,10 +19,17 @@ namespace TestWebApp.Models
             configuration.AddFile(accountConfigurationFile);
             ISessionFactory sessionFactory = configuration.BuildSessionFactory();
             return sessionFactory.OpenSession();
+        }
 
-            //NHibernate.Bytecode.IProxyFactoryFactory;
-            //NHibernate.Bytecode
-            
+        public static ISession OpenSessionForContact()
+        {
+            var configuration = new Configuration();
+            var configurationPath = HttpContext.Current.Server.MapPath(@"~\NhibernateFolder\hibernate.cfg.xml");
+            configuration.Configure(configurationPath);
+            var accountConfigurationFile = HttpContext.Current.Server.MapPath(@"~\NhibernateFolder\Contact.hbm.xml");
+            configuration.AddFile(accountConfigurationFile);
+            ISessionFactory sessionFactory = configuration.BuildSessionFactory();
+            return sessionFactory.OpenSession();
         }
     }
 }
