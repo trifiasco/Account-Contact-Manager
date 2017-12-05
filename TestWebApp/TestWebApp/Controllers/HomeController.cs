@@ -56,7 +56,7 @@ namespace TestWebApp.Controllers
             }
             catch (Exception e)
             {
-                ViewBag.Message = e.Message;
+                //ViewBag.Message = e.Message;
                 //e.Message;
                 return View();
             }
