@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using NHibernate;
+using NHibernate.Linq;
+using TestWebApp.Models;
+using TestWebApp.Entity;
 
 namespace TestWebApp.Controllers
 {
@@ -13,17 +17,9 @@ namespace TestWebApp.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
