@@ -158,6 +158,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Entity\Account.cs" />
+    <Compile Include="Entity\Contact.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -174,6 +175,7 @@
     <EmbeddedResource Include="NhibernateFolder\Account.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <Content Include="NhibernateFolder\Contact.hbm.xml" />
     <Content Include="NhibernateFolder\hibernate.cfg.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -207,13 +209,13 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Contact\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
