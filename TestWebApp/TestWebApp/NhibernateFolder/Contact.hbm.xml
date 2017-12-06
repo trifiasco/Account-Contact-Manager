@@ -11,7 +11,7 @@
 
     <bag name="Accounts" cascade="none" table="AccountContactTable" lazy="false" >
       <key column="FkContactId"/>
-      <many-to-many class="Account" column="Id"/>
+      <many-to-many class="Account" column="FkAccountId"/>
     </bag>
     
   </class>
