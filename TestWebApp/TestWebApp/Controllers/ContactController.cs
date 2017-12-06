@@ -55,7 +55,7 @@ namespace TestWebApp.Controllers
             }
             catch (Exception e)
             {
-                //ViewBag.Message = e.Message;
+                ViewBag.Message = "Contact Creation Failed. Try another Email.";
                 //e.Message;
                 return View();
             }
