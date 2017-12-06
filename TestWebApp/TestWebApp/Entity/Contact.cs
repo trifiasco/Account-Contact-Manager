@@ -18,5 +18,6 @@ namespace TestWebApp.Entity
                 return LastName + ", " + FirstName;
             }
         }
+        public virtual IList<Account> Accounts { get; set; }
     }
 }
