@@ -8,5 +8,11 @@
     <property name="FirstName" />
     <property name="LastName" />
     <property name="Email" />
+
+    <bag name="Accounts" cascade="none" table="AccountContactTable" lazy="false" >
+      <key column="FkContactId"/>
+      <many-to-many class="Account" column="Id"/>
+    </bag>
+    
   </class>
 </hibernate-mapping>
