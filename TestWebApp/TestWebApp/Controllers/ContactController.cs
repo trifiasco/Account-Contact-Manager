@@ -7,6 +7,7 @@ using NHibernate;
 using NHibernate.Linq;
 using TestWebApp.Models;
 using TestWebApp.Entity;
+using TestWebApp.Helper;
 
 namespace TestWebApp.Controllers
 {
@@ -19,7 +20,8 @@ namespace TestWebApp.Controllers
             using (ISession session = NHibernateSession.OpenSessionForContact())
             {
                 var contact = session.Query<Contact>().ToList();
-                return View(contact);
+                var viewModel = Mapper.MapToContactViewModel(contact);
+                return View(viewModel);
             }
         }
 

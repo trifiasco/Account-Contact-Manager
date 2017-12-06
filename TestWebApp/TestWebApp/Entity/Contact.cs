@@ -11,13 +11,6 @@ namespace TestWebApp.Entity
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
         public virtual string Email { get; set; }
-        public virtual string DisplayName
-        {
-            get
-            {
-                return LastName + ", " + FirstName;
-            }
-        }
         public virtual IList<Account> Accounts { get; set; }
     }
 }
