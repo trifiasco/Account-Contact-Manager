@@ -6,6 +6,11 @@
       <generator class="identity" />
     </id>
     <property name="Name" />
+
+    <bag name="Contacts" cascade="none" table="AccountContactTable" lazy="false" >
+      <key column="FkAccountId"/>
+      <many-to-many class="Contact" column="Id"/>
+    </bag>
     
   </class>
 </hibernate-mapping>
