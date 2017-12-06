@@ -9,7 +9,7 @@
 
     <bag name="Contacts" cascade="none" table="AccountContactTable" lazy="false" >
       <key column="FkAccountId"/>
-      <many-to-many class="Contact" column="Id"/>
+      <many-to-many class="Contact" column="FkContactId"/>
     </bag>
     
   </class>
