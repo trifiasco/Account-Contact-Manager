@@ -163,6 +163,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\Mapper.cs" />
+    <Compile Include="Helper\MapperForAccount.cs" />
+    <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\ContactCreateViewModel.cs" />
     <Compile Include="Models\ContactDetailsViewModel.cs" />
     <Compile Include="Models\ContactEditViewModel.cs" />
