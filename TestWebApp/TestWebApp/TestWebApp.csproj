@@ -164,6 +164,7 @@
     </Compile>
     <Compile Include="Helper\Mapper.cs" />
     <Compile Include="Models\ContactCreateViewModel.cs" />
+    <Compile Include="Models\ContactDetailsViewModel.cs" />
     <Compile Include="Models\ContactEditViewModel.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\NHibernateSession.cs" />
