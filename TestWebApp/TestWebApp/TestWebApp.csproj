@@ -163,6 +163,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\Mapper.cs" />
+    <Compile Include="Models\ContactCreateViewModel.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\NHibernateSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
