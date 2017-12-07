@@ -131,7 +131,8 @@ namespace TestWebApp.Controllers
             using (ISession session = NHibernateSession.OpenSessionForContact())
             {
                 var contact = session.Get<Contact>(id);
-                return View(contact);
+                var viewModel = Mapper.MapToContactDetailsViewModel(contact);
+                return View(viewModel);
             }
         }
 
