@@ -83,7 +83,14 @@ namespace TestWebApp.Controllers
             using (ISession session = NHibernateSession.OpenSessionForContact())
             {
                 var contact = session.Get<Contact>(id);
-                return View(contact);
+                using (ISession sessionGetAccounts = NHibernateSession.OpenSession())
+                {
+                    var accounts = sessionGetAccounts.Query<Account>().ToList();
+
+                    contact.Accounts = accounts;
+                }
+                var viewModel = Mapper.MapToContactEditViewModel(contact);
+                return View(viewModel);
             }
 
         }
