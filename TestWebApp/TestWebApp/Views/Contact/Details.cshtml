@@ -1,4 +1,4 @@
-﻿@model TestWebApp.Entity.Contact
+﻿@model TestWebApp.Models.ContactDetailsViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -36,6 +36,8 @@
 
     </dl>
 </div>
+
+    @Html.DropDownList("Accounts", (Model.Accounts).Select(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() }), new { @class = "form-control" })
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
