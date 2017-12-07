@@ -26,5 +26,20 @@ namespace TestWebApp.Helper
 
             return viewModelList;
         }
+
+        public static ContactCreateViewModel MapToContactCreateViewModel(Contact contact)
+        {
+            var contactCreateViewModel = new ContactCreateViewModel();
+            contactCreateViewModel.Id = contact.Id;
+            contactCreateViewModel.FirstName = contact.FirstName;
+            contactCreateViewModel.LastName = contact.LastName;
+            contactCreateViewModel.Email = contact.Email;
+
+            contactCreateViewModel.Accounts = contact.Accounts;
+
+            return contactCreateViewModel;
+
+
+        }
     }
 }
