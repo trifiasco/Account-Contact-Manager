@@ -1,4 +1,4 @@
-﻿@model TestWebApp.Entity.Contact
+﻿@model TestWebApp.Models.ContactEditViewModel
 
 @{
     ViewBag.Title = "Edit";
@@ -40,6 +40,8 @@
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        @Html.DropDownListFor(m => m.AccountOnSelect, new SelectList(Model.Accounts, "Id", "Name"), new { @class = "form-control" })
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
