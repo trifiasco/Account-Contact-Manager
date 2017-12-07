@@ -41,5 +41,19 @@ namespace TestWebApp.Helper
 
 
         }
+        public static ContactEditViewModel MapToContactEditViewModel(Contact contact)
+        {
+            var contactEditViewModel = new ContactEditViewModel();
+            contactEditViewModel.Id = contact.Id;
+            contactEditViewModel.FirstName = contact.FirstName;
+            contactEditViewModel.LastName = contact.LastName;
+            contactEditViewModel.Email = contact.Email;
+
+            contactEditViewModel.Accounts = contact.Accounts;
+
+            return contactEditViewModel;
+
+
+        }
     }
 }
