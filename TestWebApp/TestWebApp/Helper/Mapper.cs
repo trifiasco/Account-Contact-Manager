@@ -55,5 +55,20 @@ namespace TestWebApp.Helper
 
 
         }
+        public static ContactDetailsViewModel MapToContactDetailsViewModel(Contact contact)
+        {
+            var contactDetailsViewModel = new ContactDetailsViewModel();
+            contactDetailsViewModel.Id = contact.Id;
+            contactDetailsViewModel.FirstName = contact.FirstName;
+            contactDetailsViewModel.LastName = contact.LastName;
+            contactDetailsViewModel.Email = contact.Email;
+
+            contactDetailsViewModel.Accounts = contact.Accounts;
+
+            return contactDetailsViewModel;
+
+
+        }
+
     }
 }
