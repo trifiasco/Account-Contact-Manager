@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TestWebApp.Entity.Account>
+﻿@model IEnumerable<TestWebApp.Models.AccountViewModel>
 
 @{
     ViewBag.Title = "Account";
@@ -21,6 +21,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DropDownList("Contacts", (item.Contacts).Select(m => new SelectListItem { Text = m.FirstName, Value = m.Id.ToString() }), new { @class = "form-control" })
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
