@@ -27,17 +27,38 @@ namespace TestWebApp.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            // changes for associating dropdownlist- final
+            using (ISession session = NHibernateSession.OpenSessionForContact())
+            {
+                Contact contact = new Contact();
+                using (ISession sessionGetAccounts = NHibernateSession.OpenSession())
+                {
+                    var accounts = sessionGetAccounts.Query<Account>().ToList();
+                    
+                    contact.Accounts = accounts;
+                }
+                var viewModel = Mapper.MapToContactCreateViewModel(contact);
+                return View(viewModel);
+            }
         }
 
         // POST: Contact/Create
         [HttpPost]
-        public ActionResult Create(Contact contact)
+        public ActionResult Create(ContactCreateViewModel contactCreateViewModel)
         {
             try
             {
-               
-                // TODO: Add insert logic here
+                Contact contact = new Contact();
+                contact.Id = contactCreateViewModel.Id;
+                contact.FirstName = contactCreateViewModel.FirstName;
+                contact.LastName = contactCreateViewModel.LastName;
+                contact.Email = contactCreateViewModel.Email;
+                
+                using (ISession session = NHibernateSession.OpenSession())
+                {
+                    var account = session.Get<Account>(contactCreateViewModel.AccountOnSelect);
+                    contact.Accounts.Add(account);
+                }
                 using (ISession session = NHibernateSession.OpenSessionForContact())
                 {
                     using (ITransaction transaction = session.BeginTransaction())   //  Begin a transaction
