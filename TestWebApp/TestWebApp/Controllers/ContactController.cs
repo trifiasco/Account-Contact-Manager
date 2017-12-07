@@ -32,18 +32,11 @@ namespace TestWebApp.Controllers
 
         // POST: Contact/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Contact contact)
         {
             try
             {
-                Contact contact = new Contact();     //  Creating a new instance of the account
-                contact.Id = Convert.ToInt32(collection["Id"]);
-                contact.FirstName = collection["FirstName"].ToString();
-                contact.LastName = collection["LastName"].ToString();
-                contact.Email = collection["Email"].ToString();
-
-
-
+               
                 // TODO: Add insert logic here
                 using (ISession session = NHibernateSession.OpenSessionForContact())
                 {
