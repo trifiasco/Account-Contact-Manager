@@ -30,15 +30,11 @@ namespace TestWebApp.Controllers
 
         // POST: Home/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Account account)
         {
             try
             {
-                Account account = new Account();     //  Creating a new instance of the account
-                account.Id = Convert.ToInt32(collection["Id"]);
-                account.Name = collection["Name"].ToString();
-
-
+                
                 // TODO: Add insert logic here
                 using (ISession session = NHibernateSession.OpenSession())
                 {
