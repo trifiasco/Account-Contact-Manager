@@ -42,5 +42,14 @@ namespace TestWebApp.Helper
             accountViewModel.Contacts = account.Contacts;
             return accountViewModel;
         }
+
+        public static AccountDetailsViewModel MapToAccountDetailsViewModel(Account account)
+        {
+            var accountViewModel = new AccountDetailsViewModel();
+            accountViewModel.Id = account.Id;
+            accountViewModel.Name = account.Name;
+            accountViewModel.Contacts = account.Contacts;
+            return accountViewModel;
+        }
     }
 }
