@@ -1,4 +1,4 @@
-﻿@model TestWebApp.Entity.Account
+﻿@model TestWebApp.Models.AccountCreateViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -23,7 +23,7 @@
                 @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        @Html.DropDownListFor(m => m.ContactSelectId, new SelectList(Model.Contacts, "Id", "FirstName"), new { @class = "form-control" })
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
