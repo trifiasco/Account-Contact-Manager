@@ -8,9 +8,15 @@ namespace TestWebApp.Models
 {
     public class AccountCreateViewModel
     {
+        public AccountCreateViewModel()
+        {
+            ContactSelectId = new List<int>();
+            SelectedContacts = new List<Contact>();
+        }
         public int Id { get; set; }
         public string Name { get; set; }
-        public int ContactSelectId { get; set; }
+        public List<int> ContactSelectId { get; set; }
         public IList<Contact> Contacts { get; set; }
+        public IList<Contact> SelectedContacts { get; set; }
     }
 }

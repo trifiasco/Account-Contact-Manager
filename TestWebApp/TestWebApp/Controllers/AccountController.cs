@@ -49,11 +49,14 @@ namespace TestWebApp.Controllers
                 Account account = new Account();
                 account.Id = accountCreateViewModel.Id;
                 account.Name = accountCreateViewModel.Name;
-
                 using (ISession session = NHibernateSession.OpenSessionForContact())
                 {
-                    var contact = session.Get<Contact>(accountCreateViewModel.ContactSelectId);
-                    account.Contacts.Add(contact);
+                    foreach (var contactSelectedId in accountCreateViewModel.ContactSelectId)
+                    {
+                        var contact = session.Get<Contact>(contactSelectedId);
+                        account.Contacts.Add(contact);
+                    }
+
                 }
 
                 // TODO: Add insert logic here
