@@ -9,7 +9,7 @@ namespace TestWebApp.Helper
 {
     public class MapperForAccount
     {
-        public static List<AccountViewModel> MapToContactViewModel(List<Account> accounts)
+        public static List<AccountViewModel> MapToAccountViewModel(List<Account> accounts)
         {
             var viewModelList = new List<AccountViewModel>();
             foreach (var account in accounts)
@@ -24,6 +24,23 @@ namespace TestWebApp.Helper
             }
 
             return viewModelList;
+        }
+        public static AccountCreateViewModel MapToAccountCreateViewModel(Account account)
+        {
+            var accountViewModel = new AccountCreateViewModel();
+            accountViewModel.Id = account.Id;
+            accountViewModel.Name = account.Name;
+            accountViewModel.Contacts = account.Contacts;
+            return accountViewModel;
+        }
+
+        public static AccountEditViewModel MapToAccountEditViewModel(Account account)
+        {
+            var accountViewModel = new AccountEditViewModel();
+            accountViewModel.Id = account.Id;
+            accountViewModel.Name = account.Name;
+            accountViewModel.Contacts = account.Contacts;
+            return accountViewModel;
         }
     }
 }
