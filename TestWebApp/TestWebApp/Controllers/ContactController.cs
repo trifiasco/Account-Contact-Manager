@@ -96,7 +96,7 @@ namespace TestWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Contact contact)
+        public ActionResult Edit(int id, ContactEditViewModel contactEditViewModel)
         {
             try
             {
@@ -104,12 +104,16 @@ namespace TestWebApp.Controllers
                 {
                     var contactUpdate = session.Get<Contact>(id);
 
-                    contactUpdate.Id = contact.Id;
-                    contactUpdate.FirstName = contact.FirstName;
-                    contactUpdate.LastName = contact.LastName;
-                    contactUpdate.Email = contact.Email;
+                    contactUpdate.Id = contactEditViewModel.Id;
+                    contactUpdate.FirstName = contactEditViewModel.FirstName;
+                    contactUpdate.LastName = contactEditViewModel.LastName;
+                    contactUpdate.Email = contactEditViewModel.Email;
 
-
+                    using (ISession sessionGetAccount = NHibernateSession.OpenSession())
+                    {
+                        var account = sessionGetAccount.Get<Account>(contactEditViewModel.AccountOnSelect);
+                        contactUpdate.Accounts.Add(account);
+                    }
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {
