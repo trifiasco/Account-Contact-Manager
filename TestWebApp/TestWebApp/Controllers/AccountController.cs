@@ -20,23 +20,42 @@ namespace TestWebApp.Controllers
             using (ISession session = NHibernateSession.OpenSession())
             {
                 var accounts = session.Query<Account>().ToList();
-                var viewModel = MapperForAccount.MapToContactViewModel(accounts);
+                var viewModel = MapperForAccount.MapToAccountViewModel(accounts);
                 return View(viewModel);
             }
         }
 
         public ActionResult Create()
         {
-            return View();
+            using (ISession session = NHibernateSession.OpenSession())
+            {
+                Account account = new Account();
+                using (ISession sessionGetContacts = NHibernateSession.OpenSessionForContact())
+                {
+                    var contacts = sessionGetContacts.Query<Contact>().ToList();
+                    account.Contacts = contacts;
+                }
+                var viewModel = MapperForAccount.MapToAccountCreateViewModel(account);
+                return View(viewModel);
+            }
         }
 
         // POST: Home/Create
         [HttpPost]
-        public ActionResult Create(Account account)
+        public ActionResult Create(AccountCreateViewModel accountCreateViewModel)
         {
             try
             {
-                
+                Account account = new Account();
+                account.Id = accountCreateViewModel.Id;
+                account.Name = accountCreateViewModel.Name;
+
+                using (ISession session = NHibernateSession.OpenSessionForContact())
+                {
+                    var contact = session.Get<Contact>(accountCreateViewModel.ContactSelectId);
+                    account.Contacts.Add(contact);
+                }
+
                 // TODO: Add insert logic here
                 using (ISession session = NHibernateSession.OpenSession())
                 {
@@ -62,15 +81,23 @@ namespace TestWebApp.Controllers
         {
             using (ISession session = NHibernateSession.OpenSession())
             {
-                var employee = session.Get<Account>(id);
-                return View(employee);
+                var account = session.Get<Account>(id);
+
+                using (ISession sessionGetContacts = NHibernateSession.OpenSessionForContact())
+                {
+                    var contacts = sessionGetContacts.Query<Contact>().ToList();
+                    account.Contacts = contacts;
+                }
+
+                var viewModel = MapperForAccount.MapToAccountEditViewModel(account);
+                return View(viewModel);
             }
 
         }
 
 
         [HttpPost]
-        public ActionResult Edit(int id, Account account)
+        public ActionResult Edit(int id, AccountEditViewModel accountEditViewModel)
         {
             try
             {
@@ -78,9 +105,14 @@ namespace TestWebApp.Controllers
                 {
                     var accountUpdate = session.Get<Account>(id);
 
-                    accountUpdate.Id = account.Id;
-                    accountUpdate.Name = account.Name;
+                    accountUpdate.Id = accountEditViewModel.Id;
+                    accountUpdate.Name = accountEditViewModel.Name;
 
+                    using (ISession sessionGetContact = NHibernateSession.OpenSessionForContact())
+                    {
+                        var contact = sessionGetContact.Get<Contact>(accountEditViewModel.ContactSelectId);
+                        accountUpdate.Contacts.Add(contact);
+                    }
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {
