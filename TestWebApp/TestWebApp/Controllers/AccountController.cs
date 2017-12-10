@@ -133,8 +133,9 @@ namespace TestWebApp.Controllers
         {
             using (ISession session = NHibernateSession.OpenSession())
             {
-                var employee = session.Get<Account>(id);
-                return View(employee);
+                var account = session.Get<Account>(id);
+                var viewModel = MapperForAccount.MapToAccountDetailsViewModel(account);
+                return View(viewModel);
             }
         }
 

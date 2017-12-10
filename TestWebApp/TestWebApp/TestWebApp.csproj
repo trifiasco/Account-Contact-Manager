@@ -165,6 +165,7 @@
     <Compile Include="Helper\Mapper.cs" />
     <Compile Include="Helper\MapperForAccount.cs" />
     <Compile Include="Models\AccountCreateViewModel.cs" />
+    <Compile Include="Models\AccountDetailsViewModel.cs" />
     <Compile Include="Models\AccountEditViewModel.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
     <Compile Include="Models\ContactCreateViewModel.cs" />
