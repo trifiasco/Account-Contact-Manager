@@ -34,12 +34,13 @@ namespace TestWebApp.Helper
             return accountViewModel;
         }
 
-        public static AccountEditViewModel MapToAccountEditViewModel(Account account)
+        public static AccountEditViewModel MapToAccountEditViewModel(Account account,List<Contact>restContact)
         {
             var accountViewModel = new AccountEditViewModel();
             accountViewModel.Id = account.Id;
             accountViewModel.Name = account.Name;
-            accountViewModel.Contacts = account.Contacts;
+            accountViewModel.AlreadySelctedContacts = account.Contacts;
+            accountViewModel.NewContacts = restContact;
             return accountViewModel;
         }
 

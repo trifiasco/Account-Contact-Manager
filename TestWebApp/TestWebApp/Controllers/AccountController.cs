@@ -85,14 +85,18 @@ namespace TestWebApp.Controllers
             using (ISession session = NHibernateSession.OpenSession())
             {
                 var account = session.Get<Account>(id);
-
+                var restContacts=new List<Contact>();
                 using (ISession sessionGetContacts = NHibernateSession.OpenSessionForContact())
                 {
-                    var contacts = sessionGetContacts.Query<Contact>().ToList();
-                    account.Contacts = contacts;
+                    restContacts = sessionGetContacts.Query<Contact>().ToList();
+                    foreach(var contact in account.Contacts)
+                    {
+                        restContacts.RemoveAll(x=>x.Id==contact.Id);
+                    }
+                    //account.Contacts = contacts;
                 }
 
-                var viewModel = MapperForAccount.MapToAccountEditViewModel(account);
+                var viewModel = MapperForAccount.MapToAccountEditViewModel(account,restContacts);
                 return View(viewModel);
             }
 
@@ -113,8 +117,22 @@ namespace TestWebApp.Controllers
 
                     using (ISession sessionGetContact = NHibernateSession.OpenSessionForContact())
                     {
-                        var contact = sessionGetContact.Get<Contact>(accountEditViewModel.ContactSelectId);
-                        accountUpdate.Contacts.Add(contact);
+                        foreach(var contactId in accountEditViewModel.ContactSelectId)
+                        {
+                            var contact = sessionGetContact.Get<Contact>(contactId);
+                            accountUpdate.Contacts.Add(contact);
+                        }
+                    }
+                    foreach (var contactId in accountEditViewModel.ContactDiselectId)
+                    {
+                        foreach(var contact in accountUpdate.Contacts)
+                        {
+                            if(contact.Id==contactId)
+                            {
+                                accountUpdate.Contacts.Remove(contact);
+                                break;
+                            }
+                        }
                     }
 
                     using (ITransaction transaction = session.BeginTransaction())
