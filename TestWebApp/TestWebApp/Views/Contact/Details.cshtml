@@ -33,11 +33,20 @@
         <dd>
             @Html.DisplayFor(model => model.Email)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Accounts)
+        </dt>
+        <dd>
+            @foreach (var account in Model.Accounts)
+            {
+                @Html.ActionLink((string)(account.Name + ", "), "Details", "Account", new { id = account.Id }, null)
+            }
+        </dd>
 
     </dl>
 </div>
 
-    @Html.DropDownList("Accounts", (Model.Accounts).Select(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() }), new { @class = "form-control" })
+   
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
