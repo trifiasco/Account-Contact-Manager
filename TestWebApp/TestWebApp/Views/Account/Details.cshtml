@@ -18,8 +18,18 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model=>model.Contacts)
+        </dt>
+        <dd>
+            @foreach(var contact in Model.Contacts)
+            {
+                @Html.ActionLink((string)(contact.FirstName+", "),"Details","Contact",new { id=contact.Id},null)
+            }
+        </dd>
+
     </dl>
-    @Html.DropDownList("Accounts", (Model.Contacts).Select(m => new SelectListItem { Text = m.FirstName, Value = m.Id.ToString() }), new { @class = "form-control" })
+   
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
