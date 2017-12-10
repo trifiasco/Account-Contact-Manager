@@ -26,7 +26,12 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DropDownList("Contacts", (item.Contacts).Select(m => new SelectListItem { Text = m.FirstName, Value = m.Id.ToString() }), new { @class = "form-control" })
+              
+              @foreach(var contact in item.Contacts)
+              {
+                  @Html.ActionLink((string)(contact.FirstName+", "), "Details", "Contact", new { id=contact.Id},null);
+                  
+              }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
