@@ -27,11 +27,22 @@
         </td>
         <td>
               
-              @foreach(var contact in item.Contacts)
-              {
-                  @Html.ActionLink((string)(contact.FirstName+", "), "Details", "Contact", new { id=contact.Id},null);
+              @{ 
+                  var iterator = 0;
+                  foreach (var contact in item.Contacts)
+                  {
+
+                      string linkText = "";
+                      if (iterator != 0)
+                      {
+                          linkText += " , ";
+                      }
+
+                      @Html.ActionLink((string)(linkText+contact.FirstName), "Details", "Contact", new { id=contact.Id},null);
+                      iterator+=1;
                   
-              }
+                  }
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
