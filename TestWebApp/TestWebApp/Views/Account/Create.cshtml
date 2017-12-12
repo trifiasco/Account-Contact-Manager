@@ -8,6 +8,23 @@
 <h2>Create</h2>
 
 
+<script type="text/javascript">
+
+    $(function () {
+        $('#ContactSelectId').multiselect({
+            includeSelectAllOption: true
+        });
+        $('#btnSelected').click(function () {
+            var selected = $("#ContactSelectId option:selected");
+            var message = "";
+            selected.each(function () {
+                message += $(this).text() + " " + $(this).val() + "\n";
+            });
+            alert(message);
+        });
+    });
+</script>
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -24,7 +41,7 @@
             </div>
             @Html.Label("Select Contacts", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.CheckBoxListFor(m=>m.ContactSelectId, m=>m.Contacts, m => m.Id, m => m.FirstName,m=>m.SelectedContacts)
+                @Html.ListBoxFor(m=>m.ContactSelectId, new SelectList(Model.Contacts,"Id","FirstName"),new { @class= "ContactSelectId" })
             </div>
         </div>
         
