@@ -85,18 +85,19 @@ namespace TestWebApp.Controllers
             using (ISession session = NHibernateSession.OpenSession())
             {
                 var account = session.Get<Account>(id);
-                var restContacts=new List<Contact>();
+                var contactSelectIds = new List<int>();
+                foreach(var contact in account.Contacts)
+                {
+                    contactSelectIds.Add(contact.Id);
+                }
+                
                 using (ISession sessionGetContacts = NHibernateSession.OpenSessionForContact())
                 {
-                    restContacts = sessionGetContacts.Query<Contact>().ToList();
-                    foreach(var contact in account.Contacts)
-                    {
-                        restContacts.RemoveAll(x=>x.Id==contact.Id);
-                    }
-                    //account.Contacts = contacts;
+                    var contacts = sessionGetContacts.Query<Contact>().ToList();
+                    account.Contacts = contacts;
                 }
 
-                var viewModel = MapperForAccount.MapToAccountEditViewModel(account,restContacts);
+                var viewModel = MapperForAccount.MapToAccountEditViewModel(account,contactSelectIds);
                 return View(viewModel);
             }
 
@@ -114,26 +115,41 @@ namespace TestWebApp.Controllers
 
                     accountUpdate.Id = accountEditViewModel.Id;
                     accountUpdate.Name = accountEditViewModel.Name;
+                    //brute force edit
+                    accountUpdate.Contacts = new List<Contact>();
 
                     using (ISession sessionGetContact = NHibernateSession.OpenSessionForContact())
                     {
-                        foreach(var contactId in accountEditViewModel.ContactSelectId)
+                        foreach (var contactId in accountEditViewModel.ContactSelectId)
                         {
                             var contact = sessionGetContact.Get<Contact>(contactId);
                             accountUpdate.Contacts.Add(contact);
                         }
                     }
-                    foreach (var contactId in accountEditViewModel.ContactDiselectId)
-                    {
-                        foreach(var contact in accountUpdate.Contacts)
-                        {
-                            if(contact.Id==contactId)
-                            {
-                                accountUpdate.Contacts.Remove(contact);
-                                break;
-                            }
-                        }
-                    }
+
+                    
+
+                    ////check if one old contact id is not in the new selected contact id, then remove it
+                    //foreach (var contact in accountUpdate.Contacts)
+                    //{
+                    //    if (accountEditViewModel.ContactSelectId.Contains(contact.Id) == false)
+                    //    {
+                    //        accountUpdate.Contacts.ToList().RemoveAll(x => x.Id == contact.Id);
+                    //    }
+                    //}
+                    ////check if one new contact is not in the old contact list, then add it
+                    //foreach (var contactId in accountEditViewModel.ContactSelectId)
+                    //{
+
+                    //    using (ISession sessionGetContact = NHibernateSession.OpenSessionForContact())
+                    //    {
+                    //        var contact = sessionGetContact.Get<Contact>(contactId);
+                    //        if (accountUpdate.Contacts.ToList().Contains(contact)==false)
+                    //        {
+                    //            accountUpdate.Contacts.Add(contact);
+                    //        }
+                    //    }
+                    //}
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {

@@ -6,6 +6,22 @@
 
 <h2>Edit</h2>
 
+<script type="text/javascript">
+
+    $(function () {
+        $('#ContactSelectId').multiselect({
+            includeSelectAllOption: true
+        });
+        $('#btnSelected').click(function () {
+            var selected = $("#ContactSelectId option:selected");
+            var message = "";
+            selected.each(function () {
+                message += $(this).text() + " " + $(this).val() + "\n";
+            });
+            alert(message);
+        });
+    });
+</script>
 
 @using (Html.BeginForm())
 {
@@ -25,17 +41,12 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.Label("Already Selected Contacts. Check to remove", htmlAttributes: new { @class="control-label col-md-2"})
-            <div class="col-md-10">
-                @Html.CheckBoxListFor(m=>m.ContactDiselectId,m=>m.AlreadySelctedContacts,m=>m.Id,m=>m.FirstName,m=>m.ContactDummy1)
-            </div>
-        </div>
+        
 
         <div class="form-group">
             @Html.Label("Contacts to Add. Check to add", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.CheckBoxListFor(m => m.ContactSelectId, m => m.NewContacts, m => m.Id, m => m.FirstName, m => m.ContactDummy2)
+                @Html.ListBoxFor(m => m.ContactSelectId,new SelectList(Model.Contacts,"Id","FirstName"),new { @class="ContactSelectId"} )
             </div>
         </div>
         <div class="form-group">
