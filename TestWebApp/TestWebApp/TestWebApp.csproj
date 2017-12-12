@@ -166,6 +166,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\AccountQueries.cs" />
+    <Compile Include="Helper\ContactQueries.cs" />
     <Compile Include="Helper\Mapper.cs" />
     <Compile Include="Helper\MapperForAccount.cs" />
     <Compile Include="Models\AccountCreateViewModel.cs" />
