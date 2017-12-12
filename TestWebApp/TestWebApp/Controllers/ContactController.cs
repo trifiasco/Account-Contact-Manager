@@ -16,7 +16,7 @@ namespace TestWebApp.Controllers
     // GET: Contact
     public ActionResult Index()
     {
-      var contact = ContactQueries.GetAllContacts();
+      var contact = ContactQueries.GetAll();
       var viewModel = Mapper.MapToContactViewModel(contact);
       return View(viewModel);
 
@@ -28,7 +28,7 @@ namespace TestWebApp.Controllers
 
       Contact contact = new Contact();
 
-      var accounts = AccountQueries.GetAllAccounts();
+      var accounts = AccountQueries.GetAll();
       contact.Accounts = accounts;
 
       var viewModel = Mapper.MapToContactCreateViewModel(contact);
@@ -48,10 +48,10 @@ namespace TestWebApp.Controllers
         contact.Email = contactCreateViewModel.Email;
 
 
-        var account = AccountQueries.GetOneAccount(contactCreateViewModel.AccountOnSelect);
+        var account = AccountQueries.GetOneById(contactCreateViewModel.AccountOnSelect);
         contact.Accounts.Add(account);
 
-        ContactQueries.InsertOneContact(contact);
+        ContactQueries.Save(contact);
 
         return RedirectToAction("Index");
       }
@@ -66,8 +66,8 @@ namespace TestWebApp.Controllers
     // GET: Contact/Edit
     public ActionResult Edit(int id)
     {
-      var contact = ContactQueries.GetOneContact(id);
-      var accounts = AccountQueries.GetAllAccounts();
+      var contact = ContactQueries.GetOneById(id);
+      var accounts = AccountQueries.GetAll();
       contact.Accounts = accounts;
 
       var viewModel = Mapper.MapToContactEditViewModel(contact);
@@ -81,7 +81,7 @@ namespace TestWebApp.Controllers
       try
       {
 
-        var contactUpdate = ContactQueries.GetOneContact(id);
+        var contactUpdate = ContactQueries.GetOneById(id);
 
         contactUpdate.Id = contactEditViewModel.Id;
         contactUpdate.FirstName = contactEditViewModel.FirstName;
@@ -89,11 +89,11 @@ namespace TestWebApp.Controllers
         contactUpdate.Email = contactEditViewModel.Email;
 
 
-        var account = AccountQueries.GetOneAccount(contactEditViewModel.AccountOnSelect);
+        var account = AccountQueries.GetOneById(contactEditViewModel.AccountOnSelect);
         contactUpdate.Accounts.Add(account);
 
 
-        ContactQueries.InsertOneContact(contactUpdate);
+        ContactQueries.Save(contactUpdate);
         return RedirectToAction("Index");
       }
       catch
@@ -105,7 +105,7 @@ namespace TestWebApp.Controllers
     // GET: Contact/Details
     public ActionResult Details(int id)
     {
-      var contact = ContactQueries.GetOneContact(id);
+      var contact = ContactQueries.GetOneById(id);
       var viewModel = Mapper.MapToContactDetailsViewModel(contact);
       return View(viewModel);
     }
@@ -116,7 +116,7 @@ namespace TestWebApp.Controllers
     public ActionResult Delete(int id)
     {
 
-      var contact = ContactQueries.GetOneContact(id);
+      var contact = ContactQueries.GetOneById(id);
       return View(contact);
     }
 
@@ -126,7 +126,7 @@ namespace TestWebApp.Controllers
     {
       try
       {
-        ContactQueries.DeleteOneContact(contact);
+        ContactQueries.Delete(contact);
         return RedirectToAction("Index");
       }
       catch (Exception exception)
