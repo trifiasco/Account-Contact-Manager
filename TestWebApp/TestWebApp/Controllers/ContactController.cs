@@ -17,29 +17,25 @@ namespace TestWebApp.Controllers
         public ActionResult Index()
         {
             ViewBag.Message = "Your Contact page is here.";
-            using (ISession session = NHibernateSession.OpenSessionForContact())
-            {
-                var contact = session.Query<Contact>().ToList();
-                var viewModel = Mapper.MapToContactViewModel(contact);
-                return View(viewModel);
-            }
+
+            var contact = ContactQueries.GetAllContacts();
+
+            var viewModel = Mapper.MapToContactViewModel(contact);
+            return View(viewModel);
+
         }
 
         public ActionResult Create()
         {
             // changes for associating dropdownlist- final
-            using (ISession session = NHibernateSession.OpenSessionForContact())
-            {
-                Contact contact = new Contact();
-                using (ISession sessionGetAccounts = NHibernateSession.OpenSession())
-                {
-                    var accounts = sessionGetAccounts.Query<Account>().ToList();
-                    
-                    contact.Accounts = accounts;
-                }
-                var viewModel = Mapper.MapToContactCreateViewModel(contact);
-                return View(viewModel);
-            }
+
+            Contact contact = new Contact();
+
+            var accounts = AccountQueries.GetAllAccounts();
+            contact.Accounts = accounts;
+
+            var viewModel = Mapper.MapToContactCreateViewModel(contact);
+            return View(viewModel);
         }
 
         // POST: Contact/Create
@@ -54,19 +50,12 @@ namespace TestWebApp.Controllers
                 contact.LastName = contactCreateViewModel.LastName;
                 contact.Email = contactCreateViewModel.Email;
                 
-                using (ISession session = NHibernateSession.OpenSession())
-                {
-                    var account = session.Get<Account>(contactCreateViewModel.AccountOnSelect);
-                    contact.Accounts.Add(account);
-                }
-                using (ISession session = NHibernateSession.OpenSessionForContact())
-                {
-                    using (ITransaction transaction = session.BeginTransaction())   //  Begin a transaction
-                    {
-                        session.Save(contact); //  Save the book in session
-                        transaction.Commit();   //  Commit the changes to the database
-                    }
-                }
+
+                var account = AccountQueries.GetOneAccount(contactCreateViewModel.AccountOnSelect);
+                contact.Accounts.Add(account);
+
+                ContactQueries.InsertOneContact(contact);
+
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -80,18 +69,12 @@ namespace TestWebApp.Controllers
         // GET: Contact/Edit
         public ActionResult Edit(int id)
         {
-            using (ISession session = NHibernateSession.OpenSessionForContact())
-            {
-                var contact = session.Get<Contact>(id);
-                using (ISession sessionGetAccounts = NHibernateSession.OpenSession())
-                {
-                    var accounts = sessionGetAccounts.Query<Account>().ToList();
+                var contact = ContactQueries.GetOneContact(id);
+                var accounts = AccountQueries.GetAllAccounts();
+                contact.Accounts = accounts;
 
-                    contact.Accounts = accounts;
-                }
                 var viewModel = Mapper.MapToContactEditViewModel(contact);
                 return View(viewModel);
-            }
 
         }
 
@@ -100,27 +83,20 @@ namespace TestWebApp.Controllers
         {
             try
             {
-                using (ISession session = NHibernateSession.OpenSessionForContact())
-                {
-                    var contactUpdate = session.Get<Contact>(id);
 
-                    contactUpdate.Id = contactEditViewModel.Id;
-                    contactUpdate.FirstName = contactEditViewModel.FirstName;
-                    contactUpdate.LastName = contactEditViewModel.LastName;
-                    contactUpdate.Email = contactEditViewModel.Email;
+                var contactUpdate = ContactQueries.GetOneContact(id);
 
-                    using (ISession sessionGetAccount = NHibernateSession.OpenSession())
-                    {
-                        var account = sessionGetAccount.Get<Account>(contactEditViewModel.AccountOnSelect);
-                        contactUpdate.Accounts.Add(account);
-                    }
+                contactUpdate.Id = contactEditViewModel.Id;
+                contactUpdate.FirstName = contactEditViewModel.FirstName;
+                contactUpdate.LastName = contactEditViewModel.LastName;
+                contactUpdate.Email = contactEditViewModel.Email;
 
-                    using (ITransaction transaction = session.BeginTransaction())
-                    {
-                        session.Save(contactUpdate);
-                        transaction.Commit();
-                    }
-                }
+
+                var account = AccountQueries.GetOneAccount(contactEditViewModel.AccountOnSelect);
+                contactUpdate.Accounts.Add(account);
+
+
+                ContactQueries.InsertOneContact(contactUpdate);
                 return RedirectToAction("Index");
             }
             catch
@@ -132,12 +108,9 @@ namespace TestWebApp.Controllers
         // GET: Contact/Details
         public ActionResult Details(int id)
         {
-            using (ISession session = NHibernateSession.OpenSessionForContact())
-            {
-                var contact = session.Get<Contact>(id);
-                var viewModel = Mapper.MapToContactDetailsViewModel(contact);
-                return View(viewModel);
-            }
+            var contact = ContactQueries.GetOneContact(id);
+            var viewModel = Mapper.MapToContactDetailsViewModel(contact);
+            return View(viewModel);
         }
 
 
@@ -145,11 +118,9 @@ namespace TestWebApp.Controllers
 
         public ActionResult Delete(int id)
         {
-            using (ISession session = NHibernateSession.OpenSessionForContact())
-            {
-                var contact = session.Get<Contact>(id);
-                return View(contact);
-            }
+
+            var contact = ContactQueries.GetOneContact(id);
+            return View(contact);
         }
 
 
@@ -158,14 +129,7 @@ namespace TestWebApp.Controllers
         {
             try
             {
-                using (ISession session = NHibernateSession.OpenSessionForContact())
-                {
-                    using (ITransaction transaction = session.BeginTransaction())
-                    {
-                        session.Delete(contact);
-                        transaction.Commit();
-                    }
-                }
+                ContactQueries.DeleteOneContact(contact);
                 return RedirectToAction("Index");
             }
             catch (Exception exception)
