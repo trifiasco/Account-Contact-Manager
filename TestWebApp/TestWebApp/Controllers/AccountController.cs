@@ -115,41 +115,31 @@ namespace TestWebApp.Controllers
 
                     accountUpdate.Id = accountEditViewModel.Id;
                     accountUpdate.Name = accountEditViewModel.Name;
-                    //brute force edit
-                    accountUpdate.Contacts = new List<Contact>();
-
-                    using (ISession sessionGetContact = NHibernateSession.OpenSessionForContact())
+                    //check if one old contact id is not in the new selected contact id, then remove it
+                    for (int i = 0; i < accountUpdate.Contacts.Count; i++)
                     {
-                        foreach (var contactId in accountEditViewModel.ContactSelectId)
+                        var contact = accountUpdate.Contacts[i];
+                        if (!accountEditViewModel.ContactSelectId.Contains(contact.Id))
                         {
-                            var contact = sessionGetContact.Get<Contact>(contactId);
-                            accountUpdate.Contacts.Add(contact);
+                            accountUpdate.Contacts.Remove(contact);
                         }
                     }
 
+                    //check if one new contact is not in the old contact list, then add it
+                    foreach (var contactId in accountEditViewModel.ContactSelectId)
+                    {
+
+                        using (ISession sessionGetContact = NHibernateSession.OpenSessionForContact())
+                        {
+                            var contact = sessionGetContact.Get<Contact>(contactId);
+                            if (accountUpdate.Contacts.Where(x=>x.Id==contact.Id).ToList().Count==0)
+                            {
+                                accountUpdate.Contacts.Add(contact);
+                            }
+                        }
+                    }
                     
 
-                    ////check if one old contact id is not in the new selected contact id, then remove it
-                    //foreach (var contact in accountUpdate.Contacts)
-                    //{
-                    //    if (accountEditViewModel.ContactSelectId.Contains(contact.Id) == false)
-                    //    {
-                    //        accountUpdate.Contacts.ToList().RemoveAll(x => x.Id == contact.Id);
-                    //    }
-                    //}
-                    ////check if one new contact is not in the old contact list, then add it
-                    //foreach (var contactId in accountEditViewModel.ContactSelectId)
-                    //{
-
-                    //    using (ISession sessionGetContact = NHibernateSession.OpenSessionForContact())
-                    //    {
-                    //        var contact = sessionGetContact.Get<Contact>(contactId);
-                    //        if (accountUpdate.Contacts.ToList().Contains(contact)==false)
-                    //        {
-                    //            accountUpdate.Contacts.Add(contact);
-                    //        }
-                    //    }
-                    //}
 
                     using (ITransaction transaction = session.BeginTransaction())
                     {
