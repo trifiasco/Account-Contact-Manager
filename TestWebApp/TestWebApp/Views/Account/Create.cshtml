@@ -41,7 +41,7 @@
             </div>
             @Html.Label("Select Contacts", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.ListBoxFor(m=>m.ContactSelectId, new SelectList(Model.Contacts,"Id","FirstName"),new { @class= "ContactSelectId" })
+                @Html.ListBoxFor(m=>m.ContactSelectId, new SelectList(Model.Contacts,"Id","FirstName"),new { @class= "form-control" })
             </div>
         </div>
         
