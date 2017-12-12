@@ -11,7 +11,7 @@ namespace TestWebApp.Helper
 {
     public static class ContactQueries
     {
-        public static List<Contact> GetAllContacts()
+        public static List<Contact> GetAll()
         {
             try
             {
@@ -28,7 +28,7 @@ namespace TestWebApp.Helper
             }
         }
 
-        public static Contact GetOneContact(int id)
+        public static Contact GetOneById(int id)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace TestWebApp.Helper
             }
         }
 
-        public static void InsertOneContact(Contact contact)
+        public static void Save(Contact contact)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace TestWebApp.Helper
             }
         }
 
-        public static void DeleteOneContact(Contact contact)
+        public static void Delete(Contact contact)
         {
             try
             {

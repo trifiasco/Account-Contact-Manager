@@ -12,7 +12,7 @@ namespace TestWebApp.Helper
 {
   public static class AccountQueries
   {
-    public static List<Account> GetAllAccounts()
+    public static List<Account> GetAll()
     {
       try
       {
@@ -29,7 +29,7 @@ namespace TestWebApp.Helper
       }
     }
 
-    public static Account GetOneAccount(int id)
+    public static Account GetOneById(int id)
     {
       try
       {
@@ -46,7 +46,7 @@ namespace TestWebApp.Helper
       }
     }
 
-    public static void InsertOneAccount(Account account)
+    public static void Save(Account account)
     {
       try
       {
@@ -66,7 +66,7 @@ namespace TestWebApp.Helper
       }
     }
 
-    public static void DeleteOneAccount(Account account)
+    public static void Delete(Account account)
     {
       try
       {
