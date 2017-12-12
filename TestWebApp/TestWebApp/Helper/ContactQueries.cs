@@ -15,7 +15,7 @@ namespace TestWebApp.Helper
         {
             try
             {
-                using (ISession session = NHibernateSession.OpenSessionForContact())
+                using (ISession session = NHibernateSession.OpenSession())
                 {
                     var contacts = session.Query<Contact>().ToList();
                     return contacts;
@@ -32,7 +32,7 @@ namespace TestWebApp.Helper
         {
             try
             {
-                using (ISession session = NHibernateSession.OpenSessionForContact())
+                using (ISession session = NHibernateSession.OpenSession())
                 {
                     var contact = session.Get<Contact>(id);
                     return contact;
@@ -49,7 +49,7 @@ namespace TestWebApp.Helper
         {
             try
             {
-                using (ISession session = NHibernateSession.OpenSessionForContact())
+                using (ISession session = NHibernateSession.OpenSession())
                 {
                     using (ITransaction transaction = session.BeginTransaction())
                     {
@@ -69,7 +69,7 @@ namespace TestWebApp.Helper
         {
             try
             {
-                using (ISession session = NHibernateSession.OpenSessionForContact())
+                using (ISession session = NHibernateSession.OpenSession())
                 {
                     using (ITransaction transaction = session.BeginTransaction())
                     {
