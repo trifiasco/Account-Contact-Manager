@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TestWebApp.Models.AccountViewModel>
 
 @{
-    ViewBag.Title = "Account";
+  ViewBag.Title = "Account";
 }
 
 <h2>Account</h2>
@@ -20,36 +20,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-              
-              @{ 
-                  var iterator = 0;
-                  foreach (var contact in item.Contacts)
+
+            @{
+              var iterator = 0;
+              foreach (var contact in item.Contacts)
+              {
+
+                  string linkText = "";
+                  if (iterator != 0)
                   {
-
-                      string linkText = "";
-                      if (iterator != 0)
-                      {
-                          linkText += " , ";
-                      }
-
-                      @Html.ActionLink((string)(linkText+contact.FirstName), "Details", "Contact", new { id=contact.Id},null);
-                      iterator+=1;
-                  
+                      linkText += " , ";
                   }
+
+                @Html.ActionLink((string)(linkText + contact.FirstName), "Details", "Contact", new { id = contact.Id }, null);
+                  iterator += 1;
+
+              }
             }
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
-}
+              }
 
 </table>
