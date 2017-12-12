@@ -1,0 +1,91 @@
+﻿@model TestWebApp.Models.RndModelView
+@{
+    ViewBag.Title = "Index";
+    ViewBag.Message = "R&D page is here";
+}
+
+<h2>Index</h2>
+<h4>@ViewBag.Message</h4>
+
+
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#ContactSelectId').multiselect({
+            includeSelectAllOption: true
+        });
+        $('#btnSelected').click(function () {
+            var selected = $("#ContactSelectId option:selected");
+            var message = "";
+            selected.each(function () {
+                message += $(this).text() + " " + $(this).val() + "\n";
+            });
+            alert(message);
+        });
+    });
+</script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Select Contacts", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.ListBoxFor(m => m.ContactSelectId, new SelectList(Model.NewContacts,"Id","FirstName",Model.ContactSelectId), new { @class="ContactSelectId"})
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.Label("Contacts to Add. Check to add", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxListFor(m => m.ContactSelectId, m => m.NewContacts, m => m.Id, m => m.FirstName, m => m.ContactDummy2)
+            </div>
+        </div>*@
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+@*<div>
+    <table>
+        <tr>
+            <td><p>Select Expert's Name  </p></td>
+            <td>
+                <select id="EmpList" multiple="multiple">
+                    <option value="1">Navdeep-Asp.net</option>
+                    <option value="2">Pankaj-C#</option>
+                    <option value="3">Bikesh-Asp.Net</option>
+                    <option value="4">Pritam-Salesforce</option>
+                    <option value="5">Payal-Salesforce</option>
+                    <option value="6">Sujata-SSRS</option>
+                    <option value="7">Harikant-UI</option>
+
+                </select>
+            </td>
+            <td><input type="button" id="btnSelected" value="Get Selected" /></td>
+        </tr>
+    </table>
+
+
+</div>*@  
