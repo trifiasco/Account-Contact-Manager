@@ -53,7 +53,7 @@ namespace TestWebApp.Helper
                 {
                     using (ITransaction transaction = session.BeginTransaction())
                     {
-                        session.Save(contact);
+                        session.SaveOrUpdate(contact);
                         transaction.Commit();
                     }
                 }
