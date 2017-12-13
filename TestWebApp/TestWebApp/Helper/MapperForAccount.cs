@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using TestWebApp.Entity;
 using TestWebApp.Models;
+using AutoMapper;
 
 namespace TestWebApp.Helper
 {
@@ -11,18 +12,7 @@ namespace TestWebApp.Helper
   {
     public static List<AccountViewModel> MapToAccountViewModel(List<Account> accounts)
     {
-      var viewModelList = new List<AccountViewModel>();
-      foreach (var account in accounts)
-      {
-        viewModelList.Add(new AccountViewModel
-        {
-          Id = account.Id,
-          Name = account.Name,
-          Contacts = account.Contacts
-        });
-
-      }
-
+      var viewModelList = Mapper.Map<List<AccountViewModel>>(accounts);
       return viewModelList;
     }
     public static AccountCreateViewModel MapToAccountCreateViewModel(Account account)
