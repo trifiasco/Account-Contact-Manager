@@ -54,7 +54,7 @@ namespace TestWebApp.Helper
         {
           using (ITransaction transaction = session.BeginTransaction())
           {
-            session.Save(account);
+            session.SaveOrUpdate(account);
             transaction.Commit();
           }
         }
