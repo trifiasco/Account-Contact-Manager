@@ -13,11 +13,23 @@ namespace TestWebApp.Controllers
 {
   public class ContactController : Controller
   {
+    private readonly IAccountQueries _accountQueries;
+    private readonly IContactQueries _contactQueries;
+    private readonly IMapperForAccount _mapperForAccount;
+    private readonly IMapperForContact _mapperForContact;
+
+    public ContactController(IAccountQueries accountQueries, IContactQueries contactQueries, IMapperForAccount mapperForAccount, IMapperForContact mapperForContact)
+    {
+      _accountQueries = accountQueries;
+      _contactQueries = contactQueries;
+      _mapperForAccount = mapperForAccount;
+      _mapperForContact = mapperForContact;
+    }
     // GET: Contact
     public ActionResult Index()
     {
-      var contact = ContactQueries.GetAll();
-      var viewModel = MapperForContact.MapToContactViewModel(contact);
+      var contact = _contactQueries.GetAll();
+      var viewModel = _mapperForContact.MapToContactViewModel(contact);
       return View(viewModel);
 
     }
@@ -28,10 +40,10 @@ namespace TestWebApp.Controllers
 
       Contact contact = new Contact();
 
-      var accounts = AccountQueries.GetAll();
+      var accounts = _accountQueries.GetAll();
       contact.Accounts = accounts;
 
-      var viewModel = MapperForContact.MapToContactCreateViewModel(contact);
+      var viewModel = _mapperForContact.MapToContactCreateViewModel(contact);
       return View(viewModel);
     }
 
@@ -48,10 +60,10 @@ namespace TestWebApp.Controllers
         contact.Email = contactCreateViewModel.Email;
 
 
-        var account = AccountQueries.GetOneById(contactCreateViewModel.AccountOnSelect);
+        var account = _accountQueries.GetOneById(contactCreateViewModel.AccountOnSelect);
         contact.Accounts.Add(account);
 
-        ContactQueries.Save(contact);
+        _contactQueries.Save(contact);
 
         return RedirectToAction("Index");
       }
@@ -66,11 +78,11 @@ namespace TestWebApp.Controllers
     // GET: Contact/Edit
     public ActionResult Edit(int id)
     {
-      var contact = ContactQueries.GetOneById(id);
-      var accounts = AccountQueries.GetAll();
+      var contact = _contactQueries.GetOneById(id);
+      var accounts = _accountQueries.GetAll();
       contact.Accounts = accounts;
 
-      var viewModel = MapperForContact.MapToContactEditViewModel(contact);
+      var viewModel = _mapperForContact.MapToContactEditViewModel(contact);
       return View(viewModel);
 
     }
@@ -81,7 +93,7 @@ namespace TestWebApp.Controllers
       try
       {
 
-        var contactUpdate = ContactQueries.GetOneById(id);
+        var contactUpdate = _contactQueries.GetOneById(id);
 
         contactUpdate.Id = contactEditViewModel.Id;
         contactUpdate.FirstName = contactEditViewModel.FirstName;
@@ -89,11 +101,11 @@ namespace TestWebApp.Controllers
         contactUpdate.Email = contactEditViewModel.Email;
 
 
-        var account = AccountQueries.GetOneById(contactEditViewModel.AccountOnSelect);
+        var account = _accountQueries.GetOneById(contactEditViewModel.AccountOnSelect);
         contactUpdate.Accounts.Add(account);
 
 
-        ContactQueries.Save(contactUpdate);
+        _contactQueries.Save(contactUpdate);
         return RedirectToAction("Index");
       }
       catch
@@ -105,8 +117,8 @@ namespace TestWebApp.Controllers
     // GET: Contact/Details
     public ActionResult Details(int id)
     {
-      var contact = ContactQueries.GetOneById(id);
-      var viewModel = MapperForContact.MapToContactDetailsViewModel(contact);
+      var contact = _contactQueries.GetOneById(id);
+      var viewModel = _mapperForContact.MapToContactDetailsViewModel(contact);
       return View(viewModel);
     }
 
@@ -116,7 +128,7 @@ namespace TestWebApp.Controllers
     public ActionResult Delete(int id)
     {
 
-      var contact = ContactQueries.GetOneById(id);
+      var contact = _contactQueries.GetOneById(id);
       return View(contact);
     }
 
@@ -126,7 +138,7 @@ namespace TestWebApp.Controllers
     {
       try
       {
-        ContactQueries.Delete(contact);
+        _contactQueries.Delete(contact);
         return RedirectToAction("Index");
       }
       catch (Exception exception)

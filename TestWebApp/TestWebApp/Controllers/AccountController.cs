@@ -10,20 +10,33 @@ namespace TestWebApp.Controllers
 {
   public class AccountController : Controller
   {
+    private readonly IAccountQueries _accountQueries;
+    private readonly IContactQueries _contactQueries;
+    private readonly IMapperForAccount _mapperForAccount;
+    private readonly IMapperForContact _mapperForContact;
+
+    public AccountController(IAccountQueries accountQueries, IContactQueries contactQueries,IMapperForAccount mapperForAccount,IMapperForContact mapperForContact)
+    {
+      _accountQueries = accountQueries;
+      _contactQueries = contactQueries;
+      _mapperForAccount = mapperForAccount;
+      _mapperForContact = mapperForContact;
+    }
+
     // GET: Account
     public ActionResult Index()
     {
-      var accounts = AccountQueries.GetAll();
-      var viewModel = MapperForAccount.MapToAccountViewModel(accounts);
+      var accounts = _accountQueries.GetAll();
+      var viewModel = _mapperForAccount.MapToAccountViewModel(accounts);
       return View(viewModel);
     }
 
     public ActionResult Create()
     {
       Account account = new Account();
-      var contacts = ContactQueries.GetAll();
+      var contacts = _contactQueries.GetAll();
       account.Contacts = contacts;
-      var viewModel = MapperForAccount.MapToAccountCreateViewModel(account);
+      var viewModel = _mapperForAccount.MapToAccountCreateViewModel(account);
       return View(viewModel);
     }
 
@@ -38,11 +51,11 @@ namespace TestWebApp.Controllers
         account.Name = accountCreateViewModel.Name;
         foreach (var contactSelectedId in accountCreateViewModel.ContactSelectId)
         {
-          var contact = ContactQueries.GetOneById(contactSelectedId);
+          var contact = _contactQueries.GetOneById(contactSelectedId);
           account.Contacts.Add(contact);
         }
 
-        AccountQueries.Save(account);
+        _accountQueries.Save(account);
         return RedirectToAction("Index");
       }
       catch (Exception e)
@@ -53,16 +66,16 @@ namespace TestWebApp.Controllers
 
     public ActionResult Edit(int id)
     {
-      var account = AccountQueries.GetOneById(id);
+      var account = _accountQueries.GetOneById(id);
       var contactSelectIds = new List<int>();
       foreach (var contact in account.Contacts)
       {
         contactSelectIds.Add(contact.Id);
       }
 
-      var contacts = ContactQueries.GetAll();
+      var contacts = _contactQueries.GetAll();
       account.Contacts = contacts;
-      var viewModel = MapperForAccount.MapToAccountEditViewModel(account, contactSelectIds);
+      var viewModel = _mapperForAccount.MapToAccountEditViewModel(account, contactSelectIds);
       return View(viewModel);
     }
 
@@ -72,7 +85,7 @@ namespace TestWebApp.Controllers
     {
       try
       {
-        var accountUpdate = AccountQueries.GetOneById(id);
+        var accountUpdate = _accountQueries.GetOneById(id);
 
         accountUpdate.Id = accountEditViewModel.Id;
         accountUpdate.Name = accountEditViewModel.Name;
@@ -89,14 +102,14 @@ namespace TestWebApp.Controllers
         //check if one new contact is not in the old contact list, then add it
         foreach (var contactId in accountEditViewModel.ContactSelectId)
         {
-          var contact = ContactQueries.GetOneById(contactId);
+          var contact = _contactQueries.GetOneById(contactId);
           if (accountUpdate.Contacts.Where(x => x.Id == contact.Id).ToList().Count == 0)
           {
             accountUpdate.Contacts.Add(contact);
           }
         }
 
-        AccountQueries.Save(accountUpdate);
+        _accountQueries.Save(accountUpdate);
 
         return RedirectToAction("Index");
       }
@@ -110,14 +123,14 @@ namespace TestWebApp.Controllers
     public ActionResult Details(int id)
     {
 
-      var account = AccountQueries.GetOneById(id);
-      var viewModel = MapperForAccount.MapToAccountDetailsViewModel(account);
+      var account = _accountQueries.GetOneById(id);
+      var viewModel = _mapperForAccount.MapToAccountDetailsViewModel(account);
       return View(viewModel);
     }
 
     public ActionResult Delete(int id)
     {
-      var account = AccountQueries.GetOneById(id);
+      var account = _accountQueries.GetOneById(id);
       return View(account);
     }
 
@@ -127,7 +140,7 @@ namespace TestWebApp.Controllers
     {
       try
       {
-        AccountQueries.Delete(account);
+        _accountQueries.Delete(account);
         return RedirectToAction("Index");
       }
       catch (Exception)
