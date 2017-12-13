@@ -171,7 +171,7 @@
     </Compile>
     <Compile Include="Helper\AccountQueries.cs" />
     <Compile Include="Helper\ContactQueries.cs" />
-    <Compile Include="Helper\Mapper.cs" />
+    <Compile Include="Helper\MapperForContact.cs" />
     <Compile Include="Helper\MapperForAccount.cs" />
     <Compile Include="Models\AccountCreateViewModel.cs" />
     <Compile Include="Models\AccountDetailsViewModel.cs" />

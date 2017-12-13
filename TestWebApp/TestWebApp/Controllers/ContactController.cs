@@ -17,7 +17,7 @@ namespace TestWebApp.Controllers
     public ActionResult Index()
     {
       var contact = ContactQueries.GetAll();
-      var viewModel = Mapper.MapToContactViewModel(contact);
+      var viewModel = MapperForContact.MapToContactViewModel(contact);
       return View(viewModel);
 
     }
@@ -31,7 +31,7 @@ namespace TestWebApp.Controllers
       var accounts = AccountQueries.GetAll();
       contact.Accounts = accounts;
 
-      var viewModel = Mapper.MapToContactCreateViewModel(contact);
+      var viewModel = MapperForContact.MapToContactCreateViewModel(contact);
       return View(viewModel);
     }
 
@@ -70,7 +70,7 @@ namespace TestWebApp.Controllers
       var accounts = AccountQueries.GetAll();
       contact.Accounts = accounts;
 
-      var viewModel = Mapper.MapToContactEditViewModel(contact);
+      var viewModel = MapperForContact.MapToContactEditViewModel(contact);
       return View(viewModel);
 
     }
@@ -106,7 +106,7 @@ namespace TestWebApp.Controllers
     public ActionResult Details(int id)
     {
       var contact = ContactQueries.GetOneById(id);
-      var viewModel = Mapper.MapToContactDetailsViewModel(contact);
+      var viewModel = MapperForContact.MapToContactDetailsViewModel(contact);
       return View(viewModel);
     }
 

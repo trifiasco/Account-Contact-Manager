@@ -7,7 +7,7 @@ using TestWebApp.Models;
 
 namespace TestWebApp.Helper
 {
-    public static class Mapper
+    public static class MapperForContact
     {
         public static List<ContactViewModel> MapToContactViewModel(List<Contact> contacts)
         {
