@@ -17,10 +17,7 @@ namespace TestWebApp.Helper
     }
     public static AccountCreateViewModel MapToAccountCreateViewModel(Account account)
     {
-      var accountViewModel = new AccountCreateViewModel();
-      accountViewModel.Id = account.Id;
-      accountViewModel.Name = account.Name;
-      accountViewModel.Contacts = account.Contacts;
+      var accountViewModel = Mapper.Map<AccountCreateViewModel>(account);
       return accountViewModel;
     }
 

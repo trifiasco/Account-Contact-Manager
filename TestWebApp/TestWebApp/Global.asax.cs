@@ -19,7 +19,11 @@ namespace TestWebApp
       FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
       RouteConfig.RegisterRoutes(RouteTable.Routes);
       BundleConfig.RegisterBundles(BundleTable.Bundles);
-      Mapper.Initialize(cfg => cfg.CreateMap<Account, AccountViewModel>());
+      Mapper.Initialize(cfg => {
+        cfg.CreateMap<Account, AccountViewModel>();
+        cfg.CreateMap<Account, AccountCreateViewModel>();
+      });
+      //Mapper.Initialize();
     }
   }
 }
