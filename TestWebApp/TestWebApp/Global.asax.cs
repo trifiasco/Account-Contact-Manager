@@ -24,6 +24,11 @@ namespace TestWebApp
         cfg.CreateMap<Account, AccountCreateViewModel>();
         cfg.CreateMap<Account, AccountDetailsViewModel>();
         cfg.CreateMap<Account, AccountEditViewModel>();
+
+        cfg.CreateMap<Contact, ContactViewModel>();
+        cfg.CreateMap<Contact, ContactCreateViewModel>();
+        cfg.CreateMap<Contact, ContactDetailsViewModel>();
+        cfg.CreateMap<Contact, ContactEditViewModel>();
       });
       //Mapper.Initialize();
     }
