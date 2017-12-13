@@ -68,6 +68,9 @@
     <Reference Include="NHibernate.ByteCode.LinFu, Version=3.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.LinFu.3.1.0.4000\lib\Net35\NHibernate.ByteCode.LinFu.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -171,8 +174,16 @@
     </Compile>
     <Compile Include="Helper\AccountQueries.cs" />
     <Compile Include="Helper\ContactQueries.cs" />
+    <Compile Include="Helper\IAccountQueries.cs" />
+    <Compile Include="Helper\IContactQueries.cs" />
+    <Compile Include="Helper\IMapperForAccount.cs" />
+    <Compile Include="Helper\IMapperForContact.cs" />
     <Compile Include="Helper\MapperForContact.cs" />
     <Compile Include="Helper\MapperForAccount.cs" />
+    <Compile Include="IoC\InfrastructureRegistry.cs" />
+    <Compile Include="IoC\StructureMapConfiguration.cs" />
+    <Compile Include="IoC\StructureMapControllerFactory.cs" />
+    <Compile Include="IoC\StructureMapDependencyResolver.cs" />
     <Compile Include="Models\AccountCreateViewModel.cs" />
     <Compile Include="Models\AccountDetailsViewModel.cs" />
     <Compile Include="Models\AccountEditViewModel.cs" />
