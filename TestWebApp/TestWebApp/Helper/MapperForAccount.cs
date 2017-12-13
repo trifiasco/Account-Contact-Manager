@@ -30,10 +30,7 @@ namespace TestWebApp.Helper
 
     public static AccountDetailsViewModel MapToAccountDetailsViewModel(Account account)
     {
-      var accountViewModel = new AccountDetailsViewModel();
-      accountViewModel.Id = account.Id;
-      accountViewModel.Name = account.Name;
-      accountViewModel.Contacts = account.Contacts;
+      var accountViewModel = Mapper.Map<AccountDetailsViewModel>(account);
       return accountViewModel;
     }
   }

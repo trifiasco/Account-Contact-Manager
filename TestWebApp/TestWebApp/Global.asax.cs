@@ -22,6 +22,7 @@ namespace TestWebApp
       Mapper.Initialize(cfg => {
         cfg.CreateMap<Account, AccountViewModel>();
         cfg.CreateMap<Account, AccountCreateViewModel>();
+        cfg.CreateMap<Account, AccountDetailsViewModel>();
         cfg.CreateMap<Account, AccountEditViewModel>();
       });
       //Mapper.Initialize();
