@@ -23,10 +23,7 @@ namespace TestWebApp.Helper
 
     public static AccountEditViewModel MapToAccountEditViewModel(Account account, List<int> contactSelectIds)
     {
-      var accountViewModel = new AccountEditViewModel();
-      accountViewModel.Id = account.Id;
-      accountViewModel.Name = account.Name;
-      accountViewModel.Contacts = account.Contacts;
+      var accountViewModel = Mapper.Map<AccountEditViewModel>(account);
       accountViewModel.ContactSelectId = contactSelectIds;
       return accountViewModel;
     }
