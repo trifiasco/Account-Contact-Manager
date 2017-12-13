@@ -8,6 +8,8 @@ using System.Web.Routing;
 using AutoMapper;
 using TestWebApp.Entity;
 using TestWebApp.Models;
+using StructureMap;
+using TestWebApp.IoC;
 
 namespace TestWebApp
 {
@@ -30,7 +32,9 @@ namespace TestWebApp
         cfg.CreateMap<Contact, ContactDetailsViewModel>();
         cfg.CreateMap<Contact, ContactEditViewModel>();
       });
-      //Mapper.Initialize();
+
+      IContainer container = StructureMapConfiguration.CreateContainer();
+      DependencyResolver.SetResolver(new StructureMapDependencyResolver(container));
     }
   }
 }
