@@ -8,27 +8,27 @@ using AutoMapper;
 
 namespace TestWebApp.Helper
 {
-  public class MapperForAccount
+  public class MapperForAccount : IMapperForAccount
   {
-    public static List<AccountViewModel> MapToAccountViewModel(List<Account> accounts)
+    public List<AccountViewModel> MapToAccountViewModel(List<Account> accounts)
     {
       var viewModelList = Mapper.Map<List<AccountViewModel>>(accounts);
       return viewModelList;
     }
-    public static AccountCreateViewModel MapToAccountCreateViewModel(Account account)
+    public AccountCreateViewModel MapToAccountCreateViewModel(Account account)
     {
       var accountViewModel = Mapper.Map<AccountCreateViewModel>(account);
       return accountViewModel;
     }
 
-    public static AccountEditViewModel MapToAccountEditViewModel(Account account, List<int> contactSelectIds)
+    public AccountEditViewModel MapToAccountEditViewModel(Account account, List<int> contactSelectIds)
     {
       var accountViewModel = Mapper.Map<AccountEditViewModel>(account);
       accountViewModel.ContactSelectId = contactSelectIds;
       return accountViewModel;
     }
 
-    public static AccountDetailsViewModel MapToAccountDetailsViewModel(Account account)
+    public AccountDetailsViewModel MapToAccountDetailsViewModel(Account account)
     {
       var accountViewModel = Mapper.Map<AccountDetailsViewModel>(account);
       return accountViewModel;

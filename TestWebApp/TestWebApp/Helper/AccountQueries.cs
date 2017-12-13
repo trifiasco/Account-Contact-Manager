@@ -10,9 +10,9 @@ using NHibernate.Linq;
 
 namespace TestWebApp.Helper
 {
-  public static class AccountQueries
+  public class AccountQueries : IAccountQueries
   {
-    public static List<Account> GetAll()
+    public List<Account> GetAll()
     {
       try
       {
@@ -29,7 +29,7 @@ namespace TestWebApp.Helper
       }
     }
 
-    public static Account GetOneById(int id)
+    public Account GetOneById(int id)
     {
       try
       {
@@ -46,7 +46,7 @@ namespace TestWebApp.Helper
       }
     }
 
-    public static void Save(Account account)
+    public void Save(Account account)
     {
       try
       {
@@ -66,7 +66,7 @@ namespace TestWebApp.Helper
       }
     }
 
-    public static void Delete(Account account)
+    public void Delete(Account account)
     {
       try
       {

@@ -9,9 +9,9 @@ using TestWebApp.Models;
 
 namespace TestWebApp.Helper
 {
-    public static class ContactQueries
+    public class ContactQueries : IContactQueries
     {
-        public static List<Contact> GetAll()
+        public List<Contact> GetAll()
         {
             try
             {
@@ -28,7 +28,7 @@ namespace TestWebApp.Helper
             }
         }
 
-        public static Contact GetOneById(int id)
+        public Contact GetOneById(int id)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace TestWebApp.Helper
             }
         }
 
-        public static void Save(Contact contact)
+        public void Save(Contact contact)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace TestWebApp.Helper
             }
         }
 
-        public static void Delete(Contact contact)
+        public void Delete(Contact contact)
         {
             try
             {
