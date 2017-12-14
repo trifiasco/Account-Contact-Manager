@@ -192,9 +192,11 @@
     <Compile Include="Models\AccountEditViewModel.cs" />
     <Compile Include="Models\AccountUpdatedInLastDaysViewModel.cs" />
     <Compile Include="Models\AccountViewModel.cs" />
+    <Compile Include="Models\ContactCreatedInLastDaysViewModel.cs" />
     <Compile Include="Models\ContactCreateViewModel.cs" />
     <Compile Include="Models\ContactDetailsViewModel.cs" />
     <Compile Include="Models\ContactEditViewModel.cs" />
+    <Compile Include="Models\ContactUpdatedInLastDaysViewModel.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\NHibernateSession.cs" />
@@ -269,6 +271,7 @@
     <Content Include="Views\RND\Index.cshtml" />
     <Content Include="Views\Account\IndexForCreatedInLastDays.cshtml" />
     <Content Include="Views\Account\IndexForUpdatedInLastDays.cshtml" />
+    <Content Include="Views\Contact\IndexForCreatedInLastDays.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

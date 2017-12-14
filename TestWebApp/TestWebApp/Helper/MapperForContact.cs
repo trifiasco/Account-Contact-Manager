@@ -15,7 +15,16 @@ namespace TestWebApp.Helper
       var viewModelList = Mapper.Map<List<ContactViewModel>>(contacts);
       return viewModelList;
     }
-
+    public List<ContactCreatedInLastDaysViewModel> MapToCreatedInLastDaysViewModel(List<Contact> contacts)
+    {
+      var viewModelList = Mapper.Map<List<ContactCreatedInLastDaysViewModel>>(contacts);
+      return viewModelList;
+    }
+    public List<ContactUpdatedInLastDaysViewModel> MapToUpdatedInLastDaysViewModel(List<Contact> contacts)
+    {
+      var viewModelList = Mapper.Map<List<ContactUpdatedInLastDaysViewModel>>(contacts);
+      return viewModelList;
+    }
     public ContactCreateViewModel MapToContactCreateViewModel(Contact contact)
     {
       var contactCreateViewModel = Mapper.Map<ContactCreateViewModel>(contact);
