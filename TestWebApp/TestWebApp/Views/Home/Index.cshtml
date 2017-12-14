@@ -19,3 +19,8 @@
     @Html.Label("Created Contact in last 2 days: ")
     @Html.ActionLink(Model.ContactCreatedCount.ToString() + " Accounts", "IndexForUpdatedInLastDays", "Account", new { }, new { @class = "lead" })
 </div>
+
+<div class="jumbotron">
+    @Html.Label("Updated Contact in last 2 days: ")
+    @Html.ActionLink(Model.ContactUpdatedCount.ToString() + " Accounts", "IndexForUpdatedInLastDays", "Account", new { }, new { @class = "lead" })
+</div>
