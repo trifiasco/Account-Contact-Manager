@@ -152,5 +152,19 @@ namespace TestWebApp.Controllers
       }
     }
 
+    public ActionResult IndexForCreatedInLastDays()
+    {
+      var accounts = _accountQueries.GetAllCreatedInLastDays();
+      var viewModel = _mapperForAccount.MapToCreatedInLastDaysViewModel(accounts);
+      return View(viewModel);
+    }
+
+    public ActionResult IndexForUpdatedInLastDays()
+    {
+      var accounts = _accountQueries.GetAllUpdatedInLastDays();
+      var viewModel = _mapperForAccount.MapToUpdatedInLastDaysViewModel(accounts);
+      return View(viewModel);
+    }
+
   }
 }
