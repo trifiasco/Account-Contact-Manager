@@ -33,6 +33,8 @@ namespace TestWebApp
         cfg.CreateMap<Contact, ContactCreateViewModel>();
         cfg.CreateMap<Contact, ContactDetailsViewModel>();
         cfg.CreateMap<Contact, ContactEditViewModel>();
+        cfg.CreateMap<Contact, ContactCreatedInLastDaysViewModel>();
+        cfg.CreateMap<Contact, ContactUpdatedInLastDaysViewModel>();
       });
 
       IContainer container = StructureMapConfiguration.CreateContainer();
