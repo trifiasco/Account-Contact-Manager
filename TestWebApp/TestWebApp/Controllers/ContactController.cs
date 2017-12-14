@@ -148,5 +148,19 @@ namespace TestWebApp.Controllers
       }
     }
 
+    public ActionResult IndexForCreatedInLastDays()
+    {
+      var contacts = _contactQueries.GetAllCreatedInLastDays().ToList();
+      var viewModel = _mapperForContact.MapToCreatedInLastDaysViewModel(contacts);
+      return View(viewModel);
+    }
+
+    public ActionResult IndexForUpdatedInLastDays()
+    {
+      var contacts = _contactQueries.GetAllUpdatedInLastDays().ToList();
+      var viewModel = _mapperForContact.MapToUpdatedInLastDaysViewModel(contacts);
+      return View(viewModel);
+    }
+
   }
 }

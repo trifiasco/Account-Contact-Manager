@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TestWebApp.Models.ContactCreatedInLastDaysViewModel>
 
 @{
-    ViewBag.Title = "IndexForCreatedInLastDays";
+  ViewBag.Title = "IndexForCreatedInLastDays";
 }
 
 <h2>Contacts Created In Last 2 Days</h2>
@@ -23,7 +23,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
@@ -38,11 +39,11 @@
             @Html.DisplayFor(modelItem => item.DisplayName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
-}
+    }
 
 </table>
