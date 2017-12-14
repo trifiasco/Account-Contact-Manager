@@ -6,6 +6,8 @@
       <generator class="identity" />
     </id>
     <property name="Name" />
+    <property name="DateCreated"/>
+    <property name="DateUpdated"/>
 
     <bag name="Contacts" cascade="none" table="AccountContactTable" lazy="false" >
       <key column="FkAccountId"/>

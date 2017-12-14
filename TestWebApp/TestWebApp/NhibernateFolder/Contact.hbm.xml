@@ -8,6 +8,8 @@
     <property name="FirstName" />
     <property name="LastName" />
     <property name="Email" />
+    <property name="DateCreated"/>
+    <property name="DateUpdated"/>
 
     <bag name="Accounts" cascade="none" table="AccountContactTable" lazy="false" >
       <key column="FkContactId"/>
