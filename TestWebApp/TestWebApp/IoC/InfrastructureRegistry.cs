@@ -11,6 +11,7 @@ namespace TestWebApp.IoC
       For<IContactQueries>().Use<ContactQueries>();
       For<IMapperForAccount>().Use<MapperForAccount>();
       For<IMapperForContact>().Use<MapperForContact>();
+      For<IMapperForHome>().Use<MapperForHome>();
     }
   }
 }
