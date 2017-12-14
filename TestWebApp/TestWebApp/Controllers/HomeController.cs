@@ -1,26 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using NHibernate;
-using NHibernate.Linq;
-using TestWebApp.Models;
-using TestWebApp.Entity;
+﻿using System.Web.Mvc;
+using TestWebApp.Helper;
 
 namespace TestWebApp.Controllers
 {
-    public class HomeController : Controller
-    {
-        public ActionResult Index()
-        {
-            return View();
-        }
+  public class HomeController : Controller
+  {
+    private readonly IAccountQueries _accountQueries;
+    private readonly IMapperForHome _mapperForHome;
+    private readonly IContactQueries _contactQueries;
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-            return View();
-        }
+    public HomeController(IAccountQueries accountQueries,IContactQueries contactQueries,IMapperForHome mapperForHome)
+    {
+      _accountQueries = accountQueries;
+      _mapperForHome = mapperForHome;
+      _contactQueries = contactQueries;
     }
+
+    public ActionResult Index()
+    {
+      int accountCreatedCount = _accountQueries.GetCountOfCreatedInLastDays();
+      int accountUpdatedCount = _accountQueries.GetCountOfUpdatedInLastDays();
+      int contactCreatedCount = _contactQueries.GetAllCreatedInLastDays();
+      var viewModel = _mapperForHome.MapToHomeViewModel(accountCreatedCount,accountUpdatedCount,contactCreatedCount);
+      return View(viewModel);
+    }
+  }
 }
