@@ -20,8 +20,9 @@ namespace TestWebApp.Controllers
     {
       int accountCreatedCount = _accountQueries.GetCountOfCreatedInLastDays();
       int accountUpdatedCount = _accountQueries.GetCountOfUpdatedInLastDays();
-      int contactCreatedCount = _contactQueries.GetAllCreatedInLastDays();
-      var viewModel = _mapperForHome.MapToHomeViewModel(accountCreatedCount,accountUpdatedCount,contactCreatedCount);
+      int contactCreatedCount = _contactQueries.GetAllCreatedInLastDays().Count;
+      int contactUpdatedCount = _contactQueries.GetAllUpdatedInLastDays().Count;
+      var viewModel = _mapperForHome.MapToHomeViewModel(accountCreatedCount,accountUpdatedCount,contactCreatedCount,contactUpdatedCount);
       return View(viewModel);
     }
   }
