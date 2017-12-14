@@ -272,6 +272,7 @@
     <Content Include="Views\Account\IndexForCreatedInLastDays.cshtml" />
     <Content Include="Views\Account\IndexForUpdatedInLastDays.cshtml" />
     <Content Include="Views\Contact\IndexForCreatedInLastDays.cshtml" />
+    <Content Include="Views\Contact\IndexForUpdatedInLastDays.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
