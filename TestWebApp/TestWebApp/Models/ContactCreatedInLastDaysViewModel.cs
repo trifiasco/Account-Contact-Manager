@@ -5,8 +5,7 @@ namespace TestWebApp.Models
 {
   public class ContactCreatedInLastDaysViewModel
   {
-    public class ContactViewModel
-    {
+
       public int Id { get; set; }
       public string FirstName { get; set; }
       public string LastName { get; set; }
@@ -19,6 +18,5 @@ namespace TestWebApp.Models
         }
       }
       public IList<Account> Accounts { get; set; }
-    }
   }
 }
