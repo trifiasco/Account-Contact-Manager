@@ -49,6 +49,8 @@ namespace TestWebApp.Controllers
         Account account = new Account();
         account.Id = accountCreateViewModel.Id;
         account.Name = accountCreateViewModel.Name;
+        account.DateCreated = DateTime.Now;
+        account.DateUpdated = DateTime.Now;
         foreach (var contactSelectedId in accountCreateViewModel.ContactSelectId)
         {
           var contact = _contactQueries.GetOneById(contactSelectedId);
@@ -89,6 +91,7 @@ namespace TestWebApp.Controllers
 
         accountUpdate.Id = accountEditViewModel.Id;
         accountUpdate.Name = accountEditViewModel.Name;
+        accountUpdate.DateUpdated = DateTime.Now;
         //check if one old contact id is not in the new selected contact id, then remove it
         for (int i = 0; i < accountUpdate.Contacts.Count; i++)
         {

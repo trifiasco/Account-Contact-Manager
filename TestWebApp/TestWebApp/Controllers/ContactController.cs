@@ -58,7 +58,8 @@ namespace TestWebApp.Controllers
         contact.FirstName = contactCreateViewModel.FirstName;
         contact.LastName = contactCreateViewModel.LastName;
         contact.Email = contactCreateViewModel.Email;
-
+        contact.DateCreated = DateTime.Now;
+        contact.DateUpdated = DateTime.Now;
 
         var account = _accountQueries.GetOneById(contactCreateViewModel.AccountOnSelect);
         contact.Accounts.Add(account);
@@ -99,7 +100,7 @@ namespace TestWebApp.Controllers
         contactUpdate.FirstName = contactEditViewModel.FirstName;
         contactUpdate.LastName = contactEditViewModel.LastName;
         contactUpdate.Email = contactEditViewModel.Email;
-
+        contactUpdate.DateUpdated = DateTime.Now;
 
         var account = _accountQueries.GetOneById(contactEditViewModel.AccountOnSelect);
         contactUpdate.Accounts.Add(account);
