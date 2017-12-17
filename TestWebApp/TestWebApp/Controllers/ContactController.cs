@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using TestWebApp.Entity;
+using DomainClass.Entity;
 using TestWebApp.Helper;
 using TestWebApp.Models;
+using DomainClass.QueryHelper;
 
 namespace TestWebApp.Controllers
 {

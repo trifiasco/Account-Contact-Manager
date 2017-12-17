@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using TestWebApp.Helper;
+using DomainClass.QueryHelper;
 
 namespace TestWebApp.Controllers
 {

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
 using System.Linq;
-using TestWebApp.Entity;
+using DomainClass.Entity;
 using TestWebApp.Models;
 
 namespace TestWebApp.Helper

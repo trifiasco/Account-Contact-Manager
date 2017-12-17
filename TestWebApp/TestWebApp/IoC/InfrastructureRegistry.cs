@@ -1,5 +1,6 @@
 ﻿using StructureMap.Configuration.DSL;
 using TestWebApp.Helper;
+using DomainClass.QueryHelper;
 
 namespace TestWebApp.IoC
 {

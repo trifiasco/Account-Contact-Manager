@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
-using TestWebApp.Entity;
+using DomainClass.Entity;
 using TestWebApp.Models;
 using StructureMap;
 using TestWebApp.IoC;

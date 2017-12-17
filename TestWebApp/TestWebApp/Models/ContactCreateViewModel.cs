@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TestWebApp.Entity;
+using DomainClass.Entity;
 
 namespace TestWebApp.Models
 {
