@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="TestWebApp" namespace="TestWebApp.Entity">
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="DomainClass" namespace="DomainClass.Entity">
   <class name="Contact" table="Contact" dynamic-update="true" >
     <cache usage="read-write"/>
     <id name="Id" column="Id" type="int">
@@ -15,6 +15,6 @@
       <key column="FkContactId"/>
       <many-to-many class="Account" column="FkAccountId"/>
     </bag>
-    
+
   </class>
 </hibernate-mapping>

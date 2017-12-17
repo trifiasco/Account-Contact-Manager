@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using TestWebApp.Entity;
+using DomainClass.Entity;
 
-namespace TestWebApp.Helper
+namespace DomainClass.QueryHelper
 {
   public interface IContactQueries
   {

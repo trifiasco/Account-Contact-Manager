@@ -1,12 +1,11 @@
-﻿using NHibernate;
+﻿using DomainClass.Entity;
+using NHibernate;
 using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TestWebApp.Entity;
-using TestWebApp.Models;
 
-namespace TestWebApp.Helper
+namespace DomainClass.QueryHelper
 {
   public class ContactQueries : IContactQueries
   {

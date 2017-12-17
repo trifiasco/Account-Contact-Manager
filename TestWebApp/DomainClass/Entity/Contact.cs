@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace TestWebApp.Entity
+namespace DomainClass.Entity
 {
   public class Contact
   {
