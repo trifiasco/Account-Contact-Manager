@@ -167,15 +167,9 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RNDController.cs" />
-    <Compile Include="Entity\Account.cs" />
-    <Compile Include="Entity\Contact.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helper\AccountQueries.cs" />
-    <Compile Include="Helper\ContactQueries.cs" />
-    <Compile Include="Helper\IAccountQueries.cs" />
-    <Compile Include="Helper\IContactQueries.cs" />
     <Compile Include="Helper\IMapperForAccount.cs" />
     <Compile Include="Helper\IMapperForContact.cs" />
     <Compile Include="Helper\IMapperForHome.cs" />
@@ -199,7 +193,6 @@
     <Compile Include="Models\ContactUpdatedInLastDaysViewModel.cs" />
     <Compile Include="Models\ContactViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
-    <Compile Include="Models\NHibernateSession.cs" />
     <Compile Include="Models\RndModelView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -212,13 +205,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <EmbeddedResource Include="NhibernateFolder\Account.hbm.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Content Include="NhibernateFolder\Contact.hbm.xml" />
-    <Content Include="NhibernateFolder\hibernate.cfg.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -280,6 +266,12 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DomainClass\DomainClass.csproj">
+      <Project>{2316d8bf-14e8-4fd9-80c8-5ddb4be4ea85}</Project>
+      <Name>DomainClass</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
