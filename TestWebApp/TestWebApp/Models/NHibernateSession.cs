@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using NHibernate;
+﻿using NHibernate;
 using NHibernate.Cfg;
-using TestWebApp.Entity;
+using System.Web;
 
 namespace TestWebApp.Models
 {
-    public class NHibernateSession
+  public class NHibernateSession
     {
         public static ISession OpenSession()
         {

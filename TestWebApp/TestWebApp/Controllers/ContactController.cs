@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using NHibernate;
-using NHibernate.Linq;
-using TestWebApp.Models;
 using TestWebApp.Entity;
 using TestWebApp.Helper;
+using TestWebApp.Models;
 
 namespace TestWebApp.Controllers
 {
@@ -31,9 +27,7 @@ namespace TestWebApp.Controllers
       var contact = _contactQueries.GetAll();
       var viewModel = _mapperForContact.MapToContactViewModel(contact);
       return View(viewModel);
-
     }
-
     public ActionResult Create()
     {
       // changes for associating dropdownlist- final
@@ -46,7 +40,6 @@ namespace TestWebApp.Controllers
       var viewModel = _mapperForContact.MapToContactCreateViewModel(contact);
       return View(viewModel);
     }
-
     // POST: Contact/Create
     [HttpPost]
     public ActionResult Create(ContactCreateViewModel contactCreateViewModel)
@@ -75,7 +68,6 @@ namespace TestWebApp.Controllers
         return View();
       }
     }
-
     // GET: Contact/Edit
     public ActionResult Edit(int id)
     {
@@ -87,7 +79,6 @@ namespace TestWebApp.Controllers
       return View(viewModel);
 
     }
-
     [HttpPost]
     public ActionResult Edit(int id, ContactEditViewModel contactEditViewModel)
     {
@@ -114,7 +105,6 @@ namespace TestWebApp.Controllers
         return View();
       }
     }
-
     // GET: Contact/Details
     public ActionResult Details(int id)
     {
@@ -122,18 +112,13 @@ namespace TestWebApp.Controllers
       var viewModel = _mapperForContact.MapToContactDetailsViewModel(contact);
       return View(viewModel);
     }
-
-
     //GET: Contact/Delete
-
     public ActionResult Delete(int id)
     {
 
       var contact = _contactQueries.GetOneById(id);
       return View(contact);
     }
-
-
     [HttpPost]
     public ActionResult Delete(int id, Contact contact)
     {
@@ -147,20 +132,17 @@ namespace TestWebApp.Controllers
         return View();
       }
     }
-
     public ActionResult IndexForCreatedInLastDays()
     {
       var contacts = _contactQueries.GetAllCreatedInLastDays().ToList();
       var viewModel = _mapperForContact.MapToCreatedInLastDaysViewModel(contacts);
       return View(viewModel);
     }
-
     public ActionResult IndexForUpdatedInLastDays()
     {
       var contacts = _contactQueries.GetAllUpdatedInLastDays().ToList();
       var viewModel = _mapperForContact.MapToUpdatedInLastDaysViewModel(contacts);
       return View(viewModel);
     }
-
   }
 }

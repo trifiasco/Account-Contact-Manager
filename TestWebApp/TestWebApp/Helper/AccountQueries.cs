@@ -1,12 +1,10 @@
 ﻿using NHibernate;
+using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using TestWebApp.Entity;
 using TestWebApp.Models;
-using TestWebApp.Helper;
-using NHibernate.Linq;
 
 namespace TestWebApp.Helper
 {

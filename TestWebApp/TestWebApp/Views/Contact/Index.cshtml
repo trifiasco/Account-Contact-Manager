@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TestWebApp.Models.ContactViewModel>
 
 @{
-    ViewBag.Title = "Index";
+  ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
@@ -29,10 +29,10 @@
         <th></th>
     </tr>
 
-@{
-    
-    foreach (var item in Model)
-    {
+    @{
+
+      foreach (var item in Model)
+      {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.DisplayName)
@@ -47,19 +47,19 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
-                
+
                 @{
-                    var iterator = 0;
-                    foreach (var account in item.Accounts)
-                    {
-                        string linkText = "";
-                        if(iterator!=0)
-                        {
-                            linkText += " , ";
-                        }
-                        @Html.ActionLink((string)(linkText+account.Name), "Details", "Account", new { id = account.Id }, null)
-                        iterator += 1;
-                    }
+                  var iterator = 0;
+                  foreach (var account in item.Accounts)
+                  {
+                      string linkText = "";
+                      if (iterator != 0)
+                      {
+                          linkText += " , ";
+                      }
+                    @Html.ActionLink((string)(linkText + account.Name), "Details", "Account", new { id = account.Id }, null)
+                      iterator += 1;
+                  }
                 }
             </td>
             <td>
@@ -68,9 +68,9 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
-    }
+                  }
 
-}
+    }
 
 
 </table>

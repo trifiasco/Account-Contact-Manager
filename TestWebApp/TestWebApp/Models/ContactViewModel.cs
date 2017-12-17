@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using TestWebApp.Entity;
 
 namespace TestWebApp.Models
 {
-    public class ContactViewModel
+  public class ContactViewModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

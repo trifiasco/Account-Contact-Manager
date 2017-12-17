@@ -15,7 +15,6 @@ namespace TestWebApp.Controllers
       _mapperForHome = mapperForHome;
       _contactQueries = contactQueries;
     }
-
     public ActionResult Index()
     {
       int accountCreatedCount = _accountQueries.GetCountOfCreatedInLastDays();

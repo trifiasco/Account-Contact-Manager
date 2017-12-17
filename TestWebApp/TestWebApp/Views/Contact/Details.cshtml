@@ -1,13 +1,13 @@
 ﻿@model TestWebApp.Models.ContactDetailsViewModel
 
 @{
-    ViewBag.Title = "Details";
+  ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
 
 <div>
-    
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -39,14 +39,14 @@
         <dd>
             @foreach (var account in Model.Accounts)
             {
-                @Html.ActionLink((string)(account.Name + ", "), "Details", "Account", new { id = account.Id }, null)
+            @Html.ActionLink((string)(account.Name + ", "), "Details", "Account", new { id = account.Id }, null)
             }
         </dd>
 
     </dl>
 </div>
 
-   
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")

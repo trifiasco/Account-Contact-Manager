@@ -7,12 +7,12 @@
 
 <div class="jumbotron">
     @Html.Label("Added Accounts in last 2 days: ")
-    @Html.ActionLink(Model.AccountCreatedCount.ToString()+" Accounts", "IndexForCreatedInLastDays", "Account",new { }, new { @class = "lead" })
+    @Html.ActionLink(Model.AccountCreatedCount.ToString() + " Accounts", "IndexForCreatedInLastDays", "Account", new { }, new { @class = "lead" })
 </div>
 
 <div class="jumbotron">
     @Html.Label("Updated Accounts in last 2 days: ")
-    @Html.ActionLink(Model.AccountUpdatedCount.ToString()+" Accounts", "IndexForUpdatedInLastDays", "Account", new { }, new { @class = "lead" })
+    @Html.ActionLink(Model.AccountUpdatedCount.ToString() + " Accounts", "IndexForUpdatedInLastDays", "Account", new { }, new { @class = "lead" })
 </div>
 
 <div class="jumbotron">

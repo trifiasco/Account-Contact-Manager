@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using TestWebApp.Entity;
 
 namespace TestWebApp.Models
 {
-    public class AccountCreateViewModel
+  public class AccountCreateViewModel
     {
         public AccountCreateViewModel()
         {

@@ -22,7 +22,6 @@ namespace TestWebApp.Controllers
       _mapperForAccount = mapperForAccount;
       _mapperForContact = mapperForContact;
     }
-
     // GET: Account
     public ActionResult Index()
     {
@@ -30,7 +29,6 @@ namespace TestWebApp.Controllers
       var viewModel = _mapperForAccount.MapToAccountViewModel(accounts);
       return View(viewModel);
     }
-
     public ActionResult Create()
     {
       Account account = new Account();
@@ -39,7 +37,6 @@ namespace TestWebApp.Controllers
       var viewModel = _mapperForAccount.MapToAccountCreateViewModel(account);
       return View(viewModel);
     }
-
     // POST: Home/Create
     [HttpPost]
     public ActionResult Create(AccountCreateViewModel accountCreateViewModel)
@@ -65,7 +62,6 @@ namespace TestWebApp.Controllers
         return View();
       }
     }
-
     public ActionResult Edit(int id)
     {
       var account = _accountQueries.GetOneById(id);
@@ -80,8 +76,6 @@ namespace TestWebApp.Controllers
       var viewModel = _mapperForAccount.MapToAccountEditViewModel(account, contactSelectIds);
       return View(viewModel);
     }
-
-
     [HttpPost]
     public ActionResult Edit(int id, AccountEditViewModel accountEditViewModel)
     {
@@ -121,8 +115,6 @@ namespace TestWebApp.Controllers
         return View();
       }
     }
-
-
     public ActionResult Details(int id)
     {
 
@@ -130,14 +122,11 @@ namespace TestWebApp.Controllers
       var viewModel = _mapperForAccount.MapToAccountDetailsViewModel(account);
       return View(viewModel);
     }
-
     public ActionResult Delete(int id)
     {
       var account = _accountQueries.GetOneById(id);
       return View(account);
     }
-
-
     [HttpPost]
     public ActionResult Delete(int id, Account account)
     {
@@ -151,20 +140,17 @@ namespace TestWebApp.Controllers
         return View();
       }
     }
-
     public ActionResult IndexForCreatedInLastDays()
     {
       var accounts = _accountQueries.GetAllCreatedInLastDays();
       var viewModel = _mapperForAccount.MapToCreatedInLastDaysViewModel(accounts);
       return View(viewModel);
     }
-
     public ActionResult IndexForUpdatedInLastDays()
     {
       var accounts = _accountQueries.GetAllUpdatedInLastDays();
       var viewModel = _mapperForAccount.MapToUpdatedInLastDaysViewModel(accounts);
       return View(viewModel);
     }
-
   }
 }
