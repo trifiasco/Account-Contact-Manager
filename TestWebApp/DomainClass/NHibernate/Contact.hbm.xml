@@ -2,7 +2,7 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true" assembly="DomainClass" namespace="DomainClass.Entity">
   <class name="Contact" table="Contact" dynamic-update="true" >
     <cache usage="read-write"/>
-    <id name="Id" column="Id" type="int">
+    <id name="Id" column="Id" type="int" unsaved-value="0">
       <generator class="identity" />
     </id>
     <property name="FirstName" />
@@ -11,7 +11,7 @@
     <property name="DateCreated"/>
     <property name="DateUpdated"/>
 
-    <bag name="Accounts" cascade="none" table="AccountContactTable" lazy="false" >
+    <bag name="Accounts" cascade="none" table="AccountContactTable" lazy="false"  >
       <key column="FkContactId"/>
       <many-to-many class="Account" column="FkAccountId"/>
     </bag>

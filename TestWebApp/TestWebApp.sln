@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebApp", "TestWebApp\Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainClass", "DomainClass\DomainClass.csproj", "{2316D8BF-14E8-4FD9-80C8-5DDB4BE4EA85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationAPIV-2", "WebApplicationAPIV-2\WebApplicationAPIV-2.csproj", "{54B98494-7339-497D-8447-88309DEA12BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2316D8BF-14E8-4FD9-80C8-5DDB4BE4EA85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2316D8BF-14E8-4FD9-80C8-5DDB4BE4EA85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2316D8BF-14E8-4FD9-80C8-5DDB4BE4EA85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54B98494-7339-497D-8447-88309DEA12BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54B98494-7339-497D-8447-88309DEA12BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54B98494-7339-497D-8447-88309DEA12BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54B98494-7339-497D-8447-88309DEA12BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
