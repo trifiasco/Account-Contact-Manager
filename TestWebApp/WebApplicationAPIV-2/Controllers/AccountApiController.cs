@@ -16,8 +16,8 @@ namespace WebApplicationAPIV_2.Controllers
     public IHttpActionResult Get()
     {
       List<Account> accounts = new List<Account>();
-      AccountQueries accountQueries = new AccountQueries();
-      accounts = accountQueries.GetAll();
+      AccountQueries _accountQueries = new AccountQueries();
+      accounts = _accountQueries.GetAll();
       List<AccountModel> accountModels = new List<AccountModel>();
       foreach (var account in accounts)
       {
@@ -34,7 +34,6 @@ namespace WebApplicationAPIV_2.Controllers
 
           accountModel.Contacts.Add(contactDetails);
         }
-
         accountModels.Add(accountModel);
       }
       return Ok(accountModels);
@@ -44,8 +43,8 @@ namespace WebApplicationAPIV_2.Controllers
     [Route("{id:int}")]
     public IHttpActionResult Get(int id)
     {
-      AccountQueries accountQueries = new AccountQueries();
-      var account = accountQueries.GetOneById(id);
+      AccountQueries _accountQueries = new AccountQueries();
+      var account = _accountQueries.GetOneById(id);
       AccountModel accountModel = new AccountModel();
       accountModel.Id = account.Id;
       accountModel.Name = account.Name;
@@ -85,8 +84,8 @@ namespace WebApplicationAPIV_2.Controllers
 
           account.Contacts.Add(contact);
         }
-        AccountQueries accountQueries = new AccountQueries();
-        accountQueries.Save(account);
+        AccountQueries _accountQueries = new AccountQueries();
+        _accountQueries.Save(account);
       }
       return Ok();
     }
@@ -97,8 +96,8 @@ namespace WebApplicationAPIV_2.Controllers
     {
       if (ModelState.IsValid)
       {
-        AccountQueries accountQueries = new AccountQueries();
-        Account account = accountQueries.GetOneById(id);
+        AccountQueries _accountQueries = new AccountQueries();
+        Account account = _accountQueries.GetOneById(id);
         account.Name = accountModel.Name;
         account.DateUpdated = DateTime.Now;
         foreach (var contactDetails in accountModel.Contacts)
@@ -112,7 +111,7 @@ namespace WebApplicationAPIV_2.Controllers
           account.Contacts.Add(contact);
         }
         
-        accountQueries.Save(account);
+        _accountQueries.Save(account);
       }
       return Ok();
     }
@@ -121,9 +120,9 @@ namespace WebApplicationAPIV_2.Controllers
     [Route("{id:int}")]
     public IHttpActionResult Delete(int id)
     {
-      AccountQueries accountQueries = new AccountQueries();
-      Account account = accountQueries.GetOneById(id);
-      accountQueries.Delete(account);
+      AccountQueries _accountQueries = new AccountQueries();
+      Account account = _accountQueries.GetOneById(id);
+      _accountQueries.Delete(account);
       return Ok();
     }
 

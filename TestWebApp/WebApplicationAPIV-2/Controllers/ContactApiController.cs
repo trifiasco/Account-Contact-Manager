@@ -10,14 +10,15 @@ namespace WebApplicationAPIV_2.Controllers
   [RoutePrefix("api/contacts")]
   public class ContactApiController : ApiController
   {
+    
     [Route("")]
     [HttpGet]
     public IHttpActionResult Get()
     {
       List<Contact> contacts = new List<Contact>();
-      ContactQueries contactQueries = new ContactQueries();
 
-      contacts = contactQueries.GetAll();
+      ContactQueries _contactQueries = new ContactQueries();
+      contacts = _contactQueries.GetAll();
       List<ContactModel> contactModels = new List<ContactModel>();
 
       foreach (var contact in contacts)
@@ -46,9 +47,8 @@ namespace WebApplicationAPIV_2.Controllers
     public IHttpActionResult Get(int id)
     {
       Contact contact = new Contact();
-      ContactQueries contactQueries = new ContactQueries();
-
-      contact = contactQueries.GetOneById(id);
+      ContactQueries _contactQueries = new ContactQueries();
+      contact = _contactQueries.GetOneById(id);
 
       ContactModel contactModel = new ContactModel();
       contactModel.Id = contact.Id;
@@ -90,8 +90,8 @@ namespace WebApplicationAPIV_2.Controllers
 
           contact.Accounts.Add(account);
         }
-        ContactQueries contactQueries = new ContactQueries();
-        contactQueries.Save(contact);
+        ContactQueries _contactQueries = new ContactQueries();
+        _contactQueries.Save(contact);
       }
       return Ok();
     }
@@ -103,8 +103,8 @@ namespace WebApplicationAPIV_2.Controllers
     {
       if (ModelState.IsValid)
       {
-        ContactQueries contactQueries = new ContactQueries();
-        Contact contact = contactQueries.GetOneById(id);
+        ContactQueries _contactQueries = new ContactQueries();
+        Contact contact = _contactQueries.GetOneById(id);
         contact.FirstName = contactModel.FirstName;
         contact.LastName = contactModel.LastName;
         contact.Email = contactModel.Email;
@@ -120,7 +120,7 @@ namespace WebApplicationAPIV_2.Controllers
           contact.Accounts.Add(account);
         }
         
-        contactQueries.Save(contact);
+        _contactQueries.Save(contact);
       }
       return Ok();
     }
@@ -129,9 +129,9 @@ namespace WebApplicationAPIV_2.Controllers
     [Route("{id:int}")]
     public IHttpActionResult Delete(int id)
     {
-      ContactQueries contactQueries = new ContactQueries();
-      Contact contact = contactQueries.GetOneById(id);
-      contactQueries.Delete(contact);
+      ContactQueries _contactQueries = new ContactQueries();
+      Contact contact = _contactQueries.GetOneById(id);
+      _contactQueries.Delete(contact);
       return Ok();
     }
 

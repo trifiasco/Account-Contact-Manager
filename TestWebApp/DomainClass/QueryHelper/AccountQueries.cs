@@ -1,5 +1,4 @@
-﻿using DomainClass;
-using DomainClass.Entity;
+﻿using DomainClass.Entity;
 using NHibernate;
 using NHibernate.Linq;
 using System;

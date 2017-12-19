@@ -39,7 +39,7 @@ namespace DomainClass.QueryHelper
       catch (Exception e)
       {
         Console.WriteLine(e.Message);
-        return new List<Contact>(); 
+        return new List<Contact>();
       }
     }
 
@@ -66,8 +66,12 @@ namespace DomainClass.QueryHelper
       {
         using (ISession session = NHibernateSession.OpenSession())
         {
-          var contact = session.Get<Contact>(id);
-          return contact;
+          using (ITransaction transaction = session.BeginTransaction())
+          {
+            var contact = session.Get<Contact>(id);
+            transaction.Commit();
+            return contact;
+          }
         }
       }
       catch (Exception e)
@@ -83,6 +87,7 @@ namespace DomainClass.QueryHelper
       {
         using (ISession session = NHibernateSession.OpenSession())
         {
+          
           using (ITransaction transaction = session.BeginTransaction())
           {
             session.SaveOrUpdate(contact);
